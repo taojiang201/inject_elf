@@ -1,4 +1,4 @@
-GAS LISTING ./reverse_text.s 			page 1
+GAS LISTING ./inject_code.s 			page 1
 
 
    1              	.section .text
@@ -58,7 +58,7 @@ GAS LISTING ./reverse_text.s 			page 1
   49              	
   50              	###################### 01 print debugMsg#################
   51 0057 488D7DC8 	leaq -0x38(%rbp),%rdi
-GAS LISTING ./reverse_text.s 			page 2
+GAS LISTING ./inject_code.s 			page 2
 
 
   52 005b 48C7C600 	mov $0,%rsi
@@ -118,7 +118,7 @@ GAS LISTING ./reverse_text.s 			page 1
   94      000000
   95 0105 488D7DA0 	leaq -0x60(%rbp),%rdi
   96 0109 48C7C600 	mov $0x10000,%rsi #O_RDONLY | O_DIRECTORY 00000000|00200000=00200000=0x10000
-GAS LISTING ./reverse_text.s 			page 3
+GAS LISTING ./inject_code.s 			page 3
 
 
   96      000100
@@ -178,7 +178,7 @@ GAS LISTING ./reverse_text.s 			page 1
  132              	        ###################### 02 print debugMsg#################
  133 01a5 488DBD88 	        leaq -0x878(%rbp),%rdi  #debugMsg3(char[0x400],-0x878(%rbp))
  133      F7FFFF
-GAS LISTING ./reverse_text.s 			page 4
+GAS LISTING ./inject_code.s 			page 4
 
 
  134 01ac 48C7C600 	        mov $0,%rsi
@@ -238,7 +238,7 @@ GAS LISTING ./reverse_text.s 			page 1
  173              	
  174 0258 4D31C0   	        xor %r8,%r8
  175 025b 458A4112 	        mov 0x12(%r9),%r8b  #d->d_type
-GAS LISTING ./reverse_text.s 			page 5
+GAS LISTING ./inject_code.s 			page 5
 
 
  176 025f 4488858B 	        movb %r8b,-0x475(%rbp)
@@ -298,7 +298,7 @@ GAS LISTING ./reverse_text.s 			page 1
  212              	        struct stat {
  213              	                        __kernel_ulong_t	st_dev;
  214              	                        __kernel_ulong_t	st_ino;
-GAS LISTING ./reverse_text.s 			page 6
+GAS LISTING ./inject_code.s 			page 6
 
 
  215              	                        __kernel_ulong_t	st_nlink;
@@ -358,7 +358,7 @@ GAS LISTING ./reverse_text.s 			page 1
  263 031f 4883F8FF 	         cmp $-1,%rax
  264 0323 742D     	         je ._start_out_get_dirent_bpos_brk_1_err
  265 0325 488985E0 	         mov %rax,-0x920(%rbp) #basic_brk
-GAS LISTING ./reverse_text.s 			page 7
+GAS LISTING ./inject_code.s 			page 7
 
 
  265      F6FFFF
@@ -418,7 +418,7 @@ GAS LISTING ./reverse_text.s 			page 1
  302 03b7 488BB5D8 	         mov -0x928(%rbp),%rsi 
  302      F6FFFF
  303 03be 4889B5D0 	         mov  %rsi,-0x930(%rbp) #dname_ehdr( Elf64_Ehdr *)
-GAS LISTING ./reverse_text.s 			page 8
+GAS LISTING ./inject_code.s 			page 8
 
 
  303      F6FFFF
@@ -478,7 +478,7 @@ GAS LISTING ./reverse_text.s 			page 1
  350 0418 488985C8 	        mov %rax,-0x938(%rbp)  #dname_phdr (Elf64_Phdr*)
  350      F6FFFF
  351              	
-GAS LISTING ./reverse_text.s 			page 9
+GAS LISTING ./inject_code.s 			page 9
 
 
  352 041f 488B4628 	        mov 0x28(%rsi),%rax #e_shoff
@@ -538,7 +538,7 @@ GAS LISTING ./reverse_text.s 			page 1
  388      F6FFFF
  389 04af 48898D98 	        mov %rcx,-0x968(%rbp)#obj_align,0x08
  389      F6FFFF
-GAS LISTING ./reverse_text.s 			page 10
+GAS LISTING ./inject_code.s 			page 10
 
 
  390              	        
@@ -598,7 +598,7 @@ GAS LISTING ./reverse_text.s 			page 1
  431 0533 85C0     	        test %eax,%eax
  432 0535 7524     	        jne ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_2_jne_out
  433 0537 B8010000 	        mov $1,%eax
-GAS LISTING ./reverse_text.s 			page 11
+GAS LISTING ./inject_code.s 			page 11
 
 
  433      00
@@ -658,7 +658,7 @@ GAS LISTING ./reverse_text.s 			page 1
  472 05d0 7C0E     	        jl ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_jl
  473 05d2 488985A0 	        mov %rax,-0x960(%rbp) #obj_pgsize
  473      F6FFFF
-GAS LISTING ./reverse_text.s 			page 12
+GAS LISTING ./inject_code.s 			page 12
 
 
  474 05d9 48898598 	        mov %rax,-0x968(%rbp) #obj_align
@@ -718,7 +718,7 @@ GAS LISTING ./reverse_text.s 			page 1
  516 064d 4801C8   	        add %rcx,%rax
  517 0650 488B7E30 	        mov 0x30(%rsi),%rdi #p_align
  518 0654 4831D2   	        xor %rdx,%rdx
-GAS LISTING ./reverse_text.s 			page 13
+GAS LISTING ./inject_code.s 			page 13
 
 
  519 0657 48F7F7   	        divq %rdi
@@ -778,7 +778,7 @@ GAS LISTING ./reverse_text.s 			page 1
  565 06e4 E8000000 	        call osis_sbrk
  565      00
  566 06e9 4883F8FF 	        cmp $-1,%rax
-GAS LISTING ./reverse_text.s 			page 14
+GAS LISTING ./inject_code.s 			page 14
 
 
  567 06ed 0F84C802 	        je ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1
@@ -838,7 +838,7 @@ GAS LISTING ./reverse_text.s 			page 1
  606 0764 49894908 	       mov %rcx,0x08(%r9)
  607 0768 488B8D58 	       mov -0x9a8(%rbp),%rcx #new_sec_vaddr
  607      F6FFFF
-GAS LISTING ./reverse_text.s 			page 15
+GAS LISTING ./inject_code.s 			page 15
 
 
  608 076f 49894910 	       mov %rcx,0x10(%r9) #sh_addr
@@ -898,7 +898,7 @@ GAS LISTING ./reverse_text.s 			page 1
  648 080e C60076   	       movb $0x76,(%rax)   #s
  649 0811 C6400173 	       movb $0x73,1(%rax)  #v
  650 0815 C640022D 	       movb $0x2d,2(%rax)  #_
-GAS LISTING ./reverse_text.s 			page 16
+GAS LISTING ./inject_code.s 			page 16
 
 
  651 0819 C6400325 	       movb $0x25,3(%rax)  #%
@@ -958,7 +958,7 @@ GAS LISTING ./reverse_text.s 			page 1
  687 08be 0F05     	       syscall
  688 08c0 4883F8FF 	       cmp $-1,%rax
  689 08c4 0F84F100 	       je ._start_out_get_dirent_bpos_generate_file_out_1
-GAS LISTING ./reverse_text.s 			page 17
+GAS LISTING ./inject_code.s 			page 17
 
 
  689      0000
@@ -1018,7 +1018,7 @@ GAS LISTING ./reverse_text.s 			page 1
  730 0936 48C7C105 	       mov $0x05,%rcx
  730      000000
  731 093d 48894802 	       mov %rcx,0x02(%rax)  
-GAS LISTING ./reverse_text.s 			page 18
+GAS LISTING ./inject_code.s 			page 18
 
 
  732 0941 488B8D40 	       mov -0x09c0(%rbp),%rcx #old_entry
@@ -1078,7 +1078,7 @@ GAS LISTING ./reverse_text.s 			page 1
  773              	
  774              	
  775              	
-GAS LISTING ./reverse_text.s 			page 19
+GAS LISTING ./inject_code.s 			page 19
 
 
  776              	
@@ -1138,7 +1138,7 @@ GAS LISTING ./reverse_text.s 			page 1
  822              	osis_memset_rax:
  823              	/* The userland implementation is:
  824              	   int osis_memset_rax(void* s[.n], int c, size_t n);
-GAS LISTING ./reverse_text.s 			page 20
+GAS LISTING ./inject_code.s 			page 20
 
 
  825              	
@@ -1198,7 +1198,7 @@ GAS LISTING ./reverse_text.s 			page 1
  875 0a68 743D     	je .omr_001_6
  876 0a6a 4883FA07 	cmp $7,%rdx
  877 0a6e 7444     	je .omr_001_7
-GAS LISTING ./reverse_text.s 			page 21
+GAS LISTING ./inject_code.s 			page 21
 
 
  878              	.omr_001_0:
@@ -1258,7 +1258,7 @@ GAS LISTING ./reverse_text.s 			page 1
  930              	.global osis_snprintf
  931              	osis_snprintf:
  932              	    # 保存栈帧
-GAS LISTING ./reverse_text.s 			page 22
+GAS LISTING ./inject_code.s 			page 22
 
 
  933 0aca 55       	    pushq %rbp
@@ -1318,7 +1318,7 @@ GAS LISTING ./reverse_text.s 			page 1
  985              	    # 非法格式，跳过
  986 0b29 EBBE     	    jmp parse_format
  987              	
-GAS LISTING ./reverse_text.s 			page 23
+GAS LISTING ./inject_code.s 			page 23
 
 
  988              	handle_decimal:
@@ -1378,7 +1378,7 @@ GAS LISTING ./reverse_text.s 			page 1
  1038 0b80 41C60424 	    movb $0, (%r12)
  1038      00
  1039              	    
-GAS LISTING ./reverse_text.s 			page 24
+GAS LISTING ./inject_code.s 			page 24
 
 
  1040              	    # 返回写入的字符数
@@ -1438,7 +1438,7 @@ GAS LISTING ./reverse_text.s 			page 1
  1094              	hex_to_string:
  1095 0bba 55       	    pushq %rbp
  1096 0bbb 4889E5   	    movq %rsp, %rbp
-GAS LISTING ./reverse_text.s 			page 25
+GAS LISTING ./inject_code.s 			page 25
 
 
  1097 0bbe 4883E4F0 	    andq $0xfffffffffffffff0,%rsp
@@ -1498,7 +1498,7 @@ GAS LISTING ./reverse_text.s 			page 1
  1150 0c20 4C89CE   	    mov %r9,%rsi
  1151 0c23 4889C8   	    mov %rcx,%rax
  1152 0c26 FC       	    cld
-GAS LISTING ./reverse_text.s 			page 26
+GAS LISTING ./inject_code.s 			page 26
 
 
  1153 0c27 F3A4     	    rep movsb
@@ -1558,7 +1558,7 @@ GAS LISTING ./reverse_text.s 			page 1
  1206 0c7e 48FFC1   	    incq %rcx
  1207              	    /****add by owen jiang  for check len of buffer *****/
  1208 0c81 4151     	    push %r9
-GAS LISTING ./reverse_text.s 			page 27
+GAS LISTING ./inject_code.s 			page 27
 
 
  1209 0c83 4D31C9   	    xor %r9,%r9
@@ -1618,7 +1618,7 @@ GAS LISTING ./reverse_text.s 			page 1
  1260 0cd2 4C39C8   	        cmp    %r9,%rax
  1261 0cd5 7502     	        jne    .osis_sbrk_err
  1262 0cd7 EB07     	        jmp   .osis_sbrk_endl
-GAS LISTING ./reverse_text.s 			page 28
+GAS LISTING ./inject_code.s 			page 28
 
 
  1263              	        .osis_sbrk_err:
@@ -1678,7 +1678,7 @@ GAS LISTING ./reverse_text.s 			page 1
  1313      FFFFFF
  1314              	    osis_brk_endl:
  1315 0d19 4889EC   	    movq %rbp, %rsp
-GAS LISTING ./reverse_text.s 			page 29
+GAS LISTING ./inject_code.s 			page 29
 
 
  1316 0d1c 5D       	    popq %rbp
@@ -1731,101 +1731,101 @@ GAS LISTING ./reverse_text.s 			page 1
  1353      000000
  1354 0d9a 0F05     	syscall
  1355 0d9c 0F1F4000 	.align 16
-GAS LISTING ./reverse_text.s 			page 30
+GAS LISTING ./inject_code.s 			page 30
 
 
 DEFINED SYMBOLS
-    ./reverse_text.s:3      .text:0000000000000000 _start
-    ./reverse_text.s:1351   .text:0000000000000d90 ._start_endl_exit
-    ./reverse_text.s:46     .text:0000000000000057 .osis_get_entry
-    ./reverse_text.s:822    .text:00000000000009eb osis_memset_rax
-    ./reverse_text.s:931    .text:0000000000000aca osis_snprintf
-    ./reverse_text.s:1332   .text:0000000000000d70 ._start_endl
-    ./reverse_text.s:103    .text:0000000000000126 ._start_get_dirent
-    ./reverse_text.s:814    .text:00000000000009e6 ._start_out_get_dirent
-    ./reverse_text.s:114    .text:0000000000000161 ._start_out_get_dirent_bpos
-    ./reverse_text.s:811    .text:00000000000009e1 ._start_out_get_dirent_bpos_out
-    ./reverse_text.s:198    .text:00000000000002b9 ._start_out_get_dirent_bpos_cmp1
-    ./reverse_text.s:245    .text:0000000000000313 ._start_out_get_dirent_bpos_stat_1_continue
-    ./reverse_text.s:1244   .text:0000000000000ca7 osis_sbrk
-    ./reverse_text.s:276    .text:0000000000000352 ._start_out_get_dirent_bpos_brk_1_err
-    ./reverse_text.s:282    .text:0000000000000367 ._start_out_get_dirent_bpos_brk_1_continue
-    ./reverse_text.s:300    .text:00000000000003b0 ._start_out_get_dirent_bpos_read_1_contine
-    ./reverse_text.s:292    .text:000000000000038f _start_out_get_dirent_bpos_read_1_err
-    ./reverse_text.s:1301   .text:0000000000000cf9 osis_brk
-    ./reverse_text.s:322    .text:00000000000003c5 ._start_out_get_dirent_bpos_check_elf_hdr_1
-    ./reverse_text.s:336    .text:00000000000003e5 ._start_out_get_dirent_bpos_check_elf_hdr_1_fail
-    ./reverse_text.s:344    .text:0000000000000406 ._start_out_get_dirent_bpos_check_elf_hdr_1_succ
-    ./reverse_text.s:345    .text:0000000000000406 ._start_out_get_dirent_bpos_anlasize_elf_phdr
-    ./reverse_text.s:785    .text:00000000000009bb ._start_out_get_dirent_bpos_anlasize_elf_phdr_fail
-    ./reverse_text.s:393    .text:00000000000004b6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
-    ./reverse_text.s:497    .text:00000000000005fb ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out
-    ./reverse_text.s:405    .text:00000000000004ea ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz
-    ./reverse_text.s:406    .text:00000000000004ea ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz_out
-    ./reverse_text.s:412    .text:0000000000000501 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type
-    ./reverse_text.s:429    .text:000000000000052d ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load
-    ./reverse_text.s:418    .text:000000000000050d ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note
-    ./reverse_text.s:423    .text:0000000000000519 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note_test_1_out
-    ./reverse_text.s:440    .text:000000000000055b ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_2_jne_out
-    ./reverse_text.s:449    .text:0000000000000579 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_cmp_vaddr_out
-    ./reverse_text.s:458    .text:0000000000000592 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text
-    ./reverse_text.s:1329   .text:0000000000000d5f osis_reverse_magic
-    ./reverse_text.s:786    .text:00000000000009bb ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1
-    ./reverse_text.s:476    .text:00000000000005e0 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_jl
-    ./reverse_text.s:477    .text:00000000000005e0 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_out
-    ./reverse_text.s:485    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je
-    ./reverse_text.s:486    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je_out
-    ./reverse_text.s:487    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load_out
-    ./reverse_text.s:498    .text:00000000000005fb ._start_out_get_dirent_bpos_integrate_target_phdr
-    ./reverse_text.s:524    .text:0000000000000662 ._start_out_get_dirent_bpos_integrate_target_phdr_test_1_out
-    ./reverse_text.s:546    .text:00000000000006a9 ._start_out_get_dirent_bpos_integrate_target_shdr
-    ./reverse_text.s:548    .text:00000000000006a9 ._start_out_get_dirent_bpos_integrate_target_shdr_check_ehdr
-    ./reverse_text.s:787    .text:00000000000009bb ._start_out_get_dirent_bpos_integrate_target_shdr_out_1
-    ./reverse_text.s:563    .text:00000000000006dd ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent
-    ./reverse_text.s:788    .text:00000000000009bb ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1
-    ./reverse_text.s:623    .text:00000000000007ab ._start_out_get_dirent_bpos_adjust_target_ehdr
-    ./reverse_text.s:635    .text:00000000000007d9 ._start_out_get_dirent_bpos_generate_file
-    ./reverse_text.s:789    .text:00000000000009bb ._start_out_get_dirent_bpos_generate_file_out_1
-    ./reverse_text.s:856    .text:0000000000000a2c .omr_001
-    ./reverse_text.s:847    .text:0000000000000a14 .omr_000
-    ./reverse_text.s:915    .text:0000000000000ac5 osis_memset_rax_endl
-    ./reverse_text.s:878    .text:0000000000000a70 .omr_001_0
-    ./reverse_text.s:881    .text:0000000000000a75 .omr_001_1
-GAS LISTING ./reverse_text.s 			page 31
+     ./inject_code.s:3      .text:0000000000000000 _start
+     ./inject_code.s:1351   .text:0000000000000d90 ._start_endl_exit
+     ./inject_code.s:46     .text:0000000000000057 .osis_get_entry
+     ./inject_code.s:822    .text:00000000000009eb osis_memset_rax
+     ./inject_code.s:931    .text:0000000000000aca osis_snprintf
+     ./inject_code.s:1332   .text:0000000000000d70 ._start_endl
+     ./inject_code.s:103    .text:0000000000000126 ._start_get_dirent
+     ./inject_code.s:814    .text:00000000000009e6 ._start_out_get_dirent
+     ./inject_code.s:114    .text:0000000000000161 ._start_out_get_dirent_bpos
+     ./inject_code.s:811    .text:00000000000009e1 ._start_out_get_dirent_bpos_out
+     ./inject_code.s:198    .text:00000000000002b9 ._start_out_get_dirent_bpos_cmp1
+     ./inject_code.s:245    .text:0000000000000313 ._start_out_get_dirent_bpos_stat_1_continue
+     ./inject_code.s:1244   .text:0000000000000ca7 osis_sbrk
+     ./inject_code.s:276    .text:0000000000000352 ._start_out_get_dirent_bpos_brk_1_err
+     ./inject_code.s:282    .text:0000000000000367 ._start_out_get_dirent_bpos_brk_1_continue
+     ./inject_code.s:300    .text:00000000000003b0 ._start_out_get_dirent_bpos_read_1_contine
+     ./inject_code.s:292    .text:000000000000038f _start_out_get_dirent_bpos_read_1_err
+     ./inject_code.s:1301   .text:0000000000000cf9 osis_brk
+     ./inject_code.s:322    .text:00000000000003c5 ._start_out_get_dirent_bpos_check_elf_hdr_1
+     ./inject_code.s:336    .text:00000000000003e5 ._start_out_get_dirent_bpos_check_elf_hdr_1_fail
+     ./inject_code.s:344    .text:0000000000000406 ._start_out_get_dirent_bpos_check_elf_hdr_1_succ
+     ./inject_code.s:345    .text:0000000000000406 ._start_out_get_dirent_bpos_anlasize_elf_phdr
+     ./inject_code.s:785    .text:00000000000009bb ._start_out_get_dirent_bpos_anlasize_elf_phdr_fail
+     ./inject_code.s:393    .text:00000000000004b6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
+     ./inject_code.s:497    .text:00000000000005fb ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out
+     ./inject_code.s:405    .text:00000000000004ea ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz
+     ./inject_code.s:406    .text:00000000000004ea ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz_out
+     ./inject_code.s:412    .text:0000000000000501 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type
+     ./inject_code.s:429    .text:000000000000052d ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load
+     ./inject_code.s:418    .text:000000000000050d ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note
+     ./inject_code.s:423    .text:0000000000000519 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note_test_1_out
+     ./inject_code.s:440    .text:000000000000055b ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_2_jne_out
+     ./inject_code.s:449    .text:0000000000000579 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_cmp_vaddr_out
+     ./inject_code.s:458    .text:0000000000000592 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text
+     ./inject_code.s:1329   .text:0000000000000d5f osis_reverse_magic
+     ./inject_code.s:786    .text:00000000000009bb ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1
+     ./inject_code.s:476    .text:00000000000005e0 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_jl
+     ./inject_code.s:477    .text:00000000000005e0 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_out
+     ./inject_code.s:485    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je
+     ./inject_code.s:486    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je_out
+     ./inject_code.s:487    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load_out
+     ./inject_code.s:498    .text:00000000000005fb ._start_out_get_dirent_bpos_integrate_target_phdr
+     ./inject_code.s:524    .text:0000000000000662 ._start_out_get_dirent_bpos_integrate_target_phdr_test_1_out
+     ./inject_code.s:546    .text:00000000000006a9 ._start_out_get_dirent_bpos_integrate_target_shdr
+     ./inject_code.s:548    .text:00000000000006a9 ._start_out_get_dirent_bpos_integrate_target_shdr_check_ehdr
+     ./inject_code.s:787    .text:00000000000009bb ._start_out_get_dirent_bpos_integrate_target_shdr_out_1
+     ./inject_code.s:563    .text:00000000000006dd ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent
+     ./inject_code.s:788    .text:00000000000009bb ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1
+     ./inject_code.s:623    .text:00000000000007ab ._start_out_get_dirent_bpos_adjust_target_ehdr
+     ./inject_code.s:635    .text:00000000000007d9 ._start_out_get_dirent_bpos_generate_file
+     ./inject_code.s:789    .text:00000000000009bb ._start_out_get_dirent_bpos_generate_file_out_1
+     ./inject_code.s:856    .text:0000000000000a2c .omr_001
+     ./inject_code.s:847    .text:0000000000000a14 .omr_000
+     ./inject_code.s:915    .text:0000000000000ac5 osis_memset_rax_endl
+     ./inject_code.s:878    .text:0000000000000a70 .omr_001_0
+     ./inject_code.s:881    .text:0000000000000a75 .omr_001_1
+GAS LISTING ./inject_code.s 			page 31
 
 
-    ./reverse_text.s:885    .text:0000000000000a7d .omr_001_2
-    ./reverse_text.s:889    .text:0000000000000a86 .omr_001_3
-    ./reverse_text.s:894    .text:0000000000000a93 .omr_001_4
-    ./reverse_text.s:898    .text:0000000000000a9b .omr_001_5
-    ./reverse_text.s:903    .text:0000000000000aa7 .omr_001_6
-    ./reverse_text.s:908    .text:0000000000000ab4 .omr_001_7
-    ./reverse_text.s:949    .text:0000000000000ae9 parse_format
-    ./reverse_text.s:1036   .text:0000000000000b80 done
-    ./reverse_text.s:970    .text:0000000000000b14 handle_format
-    ./reverse_text.s:988    .text:0000000000000b2b handle_decimal
-    ./reverse_text.s:1001   .text:0000000000000b41 handle_string
-    ./reverse_text.s:1023   .text:0000000000000b67 handle_hex
-    ./reverse_text.s:1161   .text:0000000000000c2e int_to_string
-    ./reverse_text.s:1059   .text:0000000000000b95 copy_string
-    ./reverse_text.s:1094   .text:0000000000000bba hex_to_string
-    ./reverse_text.s:1065   .text:0000000000000b9c copy_loop
-    ./reverse_text.s:1085   .text:0000000000000bb5 copy_done
-    ./reverse_text.s:1109   .text:0000000000000bd7 convert_hex_digit
-    ./reverse_text.s:1118   .text:0000000000000be9 numeric_hex
-    ./reverse_text.s:1120   .text:0000000000000bec store_hex_digit
-    ./reverse_text.s:1144   .text:0000000000000c1b .osis_snprintf_store_hex_digit_check2
-    ./reverse_text.s:1184   .text:0000000000000c52 positive
-    ./reverse_text.s:1190   .text:0000000000000c60 convert_digit
-    ./reverse_text.s:1216   .text:0000000000000c94 .osis_snprintf_convert_digit_check1
-    ./reverse_text.s:1280   .text:0000000000000ce5 osis_sys_brk
-    ./reverse_text.s:1263   .text:0000000000000cd9 .osis_sbrk_err
-    ./reverse_text.s:1266   .text:0000000000000ce0 .osis_sbrk_endl
-    ./reverse_text.s:1312   .text:0000000000000d12 .osis_brk_err
-    ./reverse_text.s:1314   .text:0000000000000d19 osis_brk_endl
-    ./reverse_text.s:1324   .text:0000000000000d1e osis_reverst_id
-    ./reverse_text.s:1325   .text:0000000000000d57 osis_reverst_id_end
-    ./reverse_text.s:1326   *ABS*:0000000000000039 osis_reverst_id_len
-    ./reverse_text.s:1327   .text:0000000000000d57 osis_reverse_parasite_size
+     ./inject_code.s:885    .text:0000000000000a7d .omr_001_2
+     ./inject_code.s:889    .text:0000000000000a86 .omr_001_3
+     ./inject_code.s:894    .text:0000000000000a93 .omr_001_4
+     ./inject_code.s:898    .text:0000000000000a9b .omr_001_5
+     ./inject_code.s:903    .text:0000000000000aa7 .omr_001_6
+     ./inject_code.s:908    .text:0000000000000ab4 .omr_001_7
+     ./inject_code.s:949    .text:0000000000000ae9 parse_format
+     ./inject_code.s:1036   .text:0000000000000b80 done
+     ./inject_code.s:970    .text:0000000000000b14 handle_format
+     ./inject_code.s:988    .text:0000000000000b2b handle_decimal
+     ./inject_code.s:1001   .text:0000000000000b41 handle_string
+     ./inject_code.s:1023   .text:0000000000000b67 handle_hex
+     ./inject_code.s:1161   .text:0000000000000c2e int_to_string
+     ./inject_code.s:1059   .text:0000000000000b95 copy_string
+     ./inject_code.s:1094   .text:0000000000000bba hex_to_string
+     ./inject_code.s:1065   .text:0000000000000b9c copy_loop
+     ./inject_code.s:1085   .text:0000000000000bb5 copy_done
+     ./inject_code.s:1109   .text:0000000000000bd7 convert_hex_digit
+     ./inject_code.s:1118   .text:0000000000000be9 numeric_hex
+     ./inject_code.s:1120   .text:0000000000000bec store_hex_digit
+     ./inject_code.s:1144   .text:0000000000000c1b .osis_snprintf_store_hex_digit_check2
+     ./inject_code.s:1184   .text:0000000000000c52 positive
+     ./inject_code.s:1190   .text:0000000000000c60 convert_digit
+     ./inject_code.s:1216   .text:0000000000000c94 .osis_snprintf_convert_digit_check1
+     ./inject_code.s:1280   .text:0000000000000ce5 osis_sys_brk
+     ./inject_code.s:1263   .text:0000000000000cd9 .osis_sbrk_err
+     ./inject_code.s:1266   .text:0000000000000ce0 .osis_sbrk_endl
+     ./inject_code.s:1312   .text:0000000000000d12 .osis_brk_err
+     ./inject_code.s:1314   .text:0000000000000d19 osis_brk_endl
+     ./inject_code.s:1324   .text:0000000000000d1e osis_reverst_id
+     ./inject_code.s:1325   .text:0000000000000d57 osis_reverst_id_end
+     ./inject_code.s:1326   *ABS*:0000000000000039 osis_reverst_id_len
+     ./inject_code.s:1327   .text:0000000000000d57 osis_reverse_parasite_size
 
 NO UNDEFINED SYMBOLS
