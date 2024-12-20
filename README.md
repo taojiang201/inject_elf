@@ -1,2 +1,2 @@
 # inject_elf
-Injects code into ELF and infects ELF executables
+Injects code into the executable and dynamic library files in the current directory.
